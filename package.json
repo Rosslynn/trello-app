@@ -7,7 +7,9 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test": "vitest --reporter verbose",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "api": "json-server --watch db.json",
+    "api:delay": "json-server --delay 1000 --watch db.json"
   },
   "dependencies": {
     "core-js": "^3.8.3",
