@@ -17,9 +17,16 @@ export default {
   components: {
     BoardsContainerComponent: () => import('../components/BoardsContainerComponent.vue'),
   },
+  async created() {
+    try {
+      await this.$store.dispatch('boardsModule/obtainBoards');
+    } catch (error) {
+      console.log({ error });
+    }
+  },
 };
 </script>
 
 <style
     BoardsContainerComponent>
-</style>
+    </style>
