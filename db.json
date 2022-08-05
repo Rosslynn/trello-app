@@ -2,43 +2,53 @@
   "boards": [{
     "id": 1,
     "name": "Marquardt Inc",
-    "isStarred": false
+    "isStarred": false,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem."
   }, {
     "id": 2,
     "name": "Schinner and Sons",
-    "isStarred": true
+    "isStarred": true,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem."
   }, {
     "id": 3,
     "name": "Dicki-Bode",
-    "isStarred": false
+    "isStarred": false,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem."
   }, {
     "id": 4,
     "name": "Labadie-Harber",
-    "isStarred": false
+    "isStarred": false,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem."
   }, {
     "id": 5,
     "name": "Rohan, Weimann and West",
-    "isStarred": false
+    "isStarred": false,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem."
   }, {
     "id": 6,
     "name": "Hirthe-Kozey",
-    "isStarred": false
+    "isStarred": false,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem."
   }, {
     "id": 7,
     "name": "Mueller and Sons",
-    "isStarred": false
+    "isStarred": false,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem."
   }, {
     "id": 8,
     "name": "Pfannerstill-DuBuque",
-    "isStarred": true
+    "isStarred": true,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem."
   }, {
     "id": 9,
     "name": "Harris, Jacobi and Lind",
-    "isStarred": true
+    "isStarred": true,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem."
   }, {
     "id": 10,
     "name": "Kuphal Inc",
-    "isStarred": false
+    "isStarred": false,
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem."
   }],
   "stages": [{
     "id": 1,

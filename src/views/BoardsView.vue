@@ -4,7 +4,7 @@
       <div class="col-12">
         <boards-container-component title="My starred" :boards="[]"></boards-container-component>
       </div>
-      <div class="col-12">
+      <div class="col-12 my-3">
         <boards-container-component title="My boards" :boards="[]"></boards-container-component>
       </div>
     </div>
