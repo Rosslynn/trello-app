@@ -1,5 +1,8 @@
+/* eslint-disable no-param-reassign */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import NProgress from 'nprogress';
+import store from '../store/index';
 
 Vue.use(VueRouter);
 
@@ -11,6 +14,18 @@ const routes = [
       {
         path: '',
         name: 'boards-view',
+        props: true,
+        async beforeEnter(to, from, next) {
+          NProgress.start();
+          try {
+            await store.dispatch('boardsModule/obtainBoards');
+            to.params.boards = store.getters['boardsModule/boards'];
+            NProgress.done();
+            next();
+          } catch (error) {
+            console.log({ error });
+          }
+        },
         component: () => import('../views/BoardsView.vue'),
       },
       {

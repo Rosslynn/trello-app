@@ -7,6 +7,7 @@
       <div class="col-12 my-3">
         <boards-container-component title="My boards" :boards="[]"></boards-container-component>
       </div>
+      {{ boards }} uwu
     </div>
   </div>
 </template>
@@ -17,12 +18,10 @@ export default {
   components: {
     BoardsContainerComponent: () => import('../components/BoardsContainerComponent.vue'),
   },
-  async created() {
-    try {
-      await this.$store.dispatch('boardsModule/obtainBoards');
-    } catch (error) {
-      console.log({ error });
-    }
+  props: {
+    boards: {
+      type: Array,
+    },
   },
 };
 </script>
