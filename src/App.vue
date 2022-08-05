@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import 'nprogress/nprogress.css';
 import HeaderComponent from './components/HeaderComponent.vue';
 
 export default {
