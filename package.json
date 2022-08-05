@@ -9,7 +9,7 @@
     "test": "vitest --reporter verbose",
     "coverage": "vitest run --coverage",
     "api": "json-server --watch db.json",
-    "api:delay": "json-server --delay 2000 --watch db.json"
+    "api:delay": "json-server --delay 1000 --watch db.json"
   },
   "dependencies": {
     "axios": "^0.27.2",

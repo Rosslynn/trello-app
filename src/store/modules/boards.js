@@ -22,8 +22,8 @@ const getters = {
   boards(state) {
     return [...state.boards];
   },
-  boardsLength(state) {
-    return state.boards.length;
+  boardsCount(_state, getters) {
+    return getters.boards.length;
   },
 };
 
