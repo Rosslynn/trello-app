@@ -3,7 +3,9 @@
    <header>
     <header-component></header-component>
    </header>
-    <router-view></router-view>
+   <main>
+     <router-view></router-view>
+   </main>
   </div>
 </template>
 
@@ -19,4 +21,7 @@ export default {
 </script>
 
 <style>
+  main {
+    padding: 30px 0px;
+  }
 </style>
