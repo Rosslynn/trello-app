@@ -5,7 +5,7 @@
         <h2 class="h4 text-dark">{{ title }}</h2>
       </div>
       <div class="col-12 d-flex flex-wrap justify-content-between">
-        <board-component  v-for="i in 6" :key="i"></board-component>
+        <board-component  v-for="board in boards" :key="board.id" :board="board"></board-component>
       </div>
     </div>
   </div>
