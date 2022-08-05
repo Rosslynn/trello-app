@@ -25,6 +25,9 @@ const getters = {
   boardsCount(_state, getters) {
     return getters.boards.length;
   },
+  starredBoards(_state, getters) {
+    return (isStarred = true) => getters.boards.filter((board) => board.isStarred === isStarred);
+  },
 };
 
 export default {

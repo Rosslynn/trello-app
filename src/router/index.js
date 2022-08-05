@@ -20,6 +20,7 @@ const routes = [
           try {
             await store.dispatch('boardsModule/obtainBoards');
             to.params.boards = store.getters['boardsModule/boards'];
+            to.params.starredBoards = store.getters['boardsModule/starredBoards']();
             NProgress.done();
             next();
           } catch (error) {

@@ -7,7 +7,7 @@
       <div class="col-12 my-3">
         <boards-container-component title="My boards" :boards="[]"></boards-container-component>
       </div>
-      {{ boards }} uwu
+      {{ starredBoards }} uwu
     </div>
   </div>
 </template>
@@ -21,6 +21,13 @@ export default {
   props: {
     boards: {
       type: Array,
+      require: true,
+      default: () => [],
+    },
+    starredBoards: {
+      type: Array,
+      require: true,
+      default: () => [],
     },
   },
 };
