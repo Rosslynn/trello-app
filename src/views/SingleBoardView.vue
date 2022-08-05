@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    Single board view
   </div>
 </template>
 

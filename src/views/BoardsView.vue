@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    Boards view
   </div>
 </template>
 
