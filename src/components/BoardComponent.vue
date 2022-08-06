@@ -1,17 +1,9 @@
 <!-- eslint-disable max-len -->
 <template>
   <div class="card text-white mb-4" :class="randomClass" style="max-width: 18rem;">
-    <div class="card-header">{{ board.name }}
-      <div class="dropdown" @click.stop>
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-          Dropdown
-        </button>
-        <div class="dropdown-menu">
-          <button class="dropdown-item" type="button">Action</button>
-          <button class="dropdown-item" type="button">Another action</button>
-          <button class="dropdown-item" type="button">Something else here</button>
-        </div>
-      </div>
+    <div class="card-header position-relative">
+      <p class="mb-0">{{ board.name }}</p>
+      <dropdown-component></dropdown-component>
     </div>
     <router-link :to="{ name: 'single-board-view', params: { id: board.id } }">
     <div class="card-body">
@@ -27,7 +19,7 @@ export default {
   name: 'BoardComponent',
   data() {
     return {
-      availableClasses: ['bg-primary', 'bg-secondary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info', 'bg-dark', 'bg-light'],
+      availableClasses: ['bg-primary', 'bg-secondary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info', 'bg-dark'],
     };
   },
   props: {
@@ -44,14 +36,16 @@ export default {
       return Math.floor(Math.random() * ((this.availableClassesIndexes) + 1));
     },
     randomClass() {
-      const classToAdd = this.availableClasses[this.randomIndex];
-      return (classToAdd === 'bg-light') ? `${classToAdd} text-dark` : classToAdd;
+      return this.availableClasses[this.randomIndex];
     },
+  },
+  components: {
+    DropdownComponent: () => import('./DropdownComponent.vue'),
   },
 };
 </script>
 
-<style>
+<style scoped>
 a {
   text-decoration: none !important;
   color: inherit !important;

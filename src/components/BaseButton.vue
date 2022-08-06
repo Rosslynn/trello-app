@@ -1,7 +1,5 @@
 <template>
-  <div>
-
-  </div>
+  <button v-bind="$attrs" v-on="$listeners"><slot name="text"></slot></button>
 </template>
 
 <script>
@@ -10,5 +8,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+  button {
+    position: relative;
+  }
 </style>
