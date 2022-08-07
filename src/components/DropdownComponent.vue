@@ -1,17 +1,45 @@
 <template>
   <div class="dropdown drop-container">
     <base-button class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
-      <template #text>
+      <template #icon>
         <base-icon name="more-vertical" class="custom-icon" color="white"></base-icon>
       </template>
     </base-button>
     <div class="dropdown-menu dropdown-menu-right">
-      <button class="dropdown-item" type="button">Action</button>
-      <button class="dropdown-item" type="button">Another action</button>
-      <button class="dropdown-item" type="button">Something else here</button>
+      <router-link
+        :to="{ name: 'edit-board', params: { id: board.id }}"
+        class="dropdown-item"
+        type="button">
+        Edit
+      </router-link>
+      <base-button class="dropdown-item" type="button" @click="deleteBoard">Delete</base-button>
     </div>
   </div>
 </template>
+
+<script>
+import Swal from 'sweetalert2';
+
+export default {
+  name: 'DropdownComponent',
+  props: {
+    board: {
+      type: Object,
+      required: true,
+    },
+  },
+  methods: {
+    async deleteBoard() {
+      const response = await Swal.fire({
+        title: `Deleting board with name ${this.board.name}`, text: 'Do you want to continue?', icon: 'warning', confirmButtonText: 'Delete', showCancelButton: true, cancelButtonText: 'Cancel',
+      });
+      if (response.isConfirmed) {
+        console.log('Borrando');
+      }
+    },
+  },
+};
+</script>
 
 <style scoped>
 .drop-container {

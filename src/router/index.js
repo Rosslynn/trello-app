@@ -35,6 +35,12 @@ const routes = [
         props: true,
         component: () => import('../views/SingleBoardView.vue'),
       },
+      {
+        path: ':id/edit',
+        name: 'edit-board',
+        component: () => import('../views/EditBoardView.vue'),
+        props: true,
+      },
     ],
   },
   {

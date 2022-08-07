@@ -3,7 +3,7 @@
   <div class="card text-white mb-4" :class="randomClass" style="max-width: 18rem;">
     <div class="card-header position-relative">
       <p class="mb-0">{{ board.name }}</p>
-      <dropdown-component></dropdown-component>
+      <dropdown-component :board="board"></dropdown-component>
     </div>
     <router-link :to="{ name: 'single-board-view', params: { id: board.id } }">
     <div class="card-body">
