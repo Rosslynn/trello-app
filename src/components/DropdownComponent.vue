@@ -39,7 +39,7 @@ export default {
         cancelButtonText: 'Cancel',
       });
       if (response.isConfirmed) {
-        console.log('Borrando');
+        this.$store.dispatch('boardsModule/removeBoard', this.board.id);
       }
     },
   },

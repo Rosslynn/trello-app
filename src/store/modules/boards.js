@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow */
-import { getBoards } from '../../services/boardsService';
+import { getBoards, deleteBoard } from '../../services/boardsService';
 
 const state = () => ({
   boards: [],
@@ -16,6 +16,14 @@ const actions = {
     const { data } = await getBoards();
     commit('SET_BOARDS', data);
   },
+  async removeBoard({ commit, state }, boardId) {
+    try {
+      await deleteBoard(boardId);
+      commit('SET_BOARDS', state.boards.filter((board) => board.id !== boardId));
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
 
 const getters = {
@@ -26,7 +34,8 @@ const getters = {
     return getters.boards.length;
   },
   starredBoards(_state, getters) {
-    return (isStarred = true) => getters.boards.filter((board) => board.isStarred === isStarred);
+    // eslint-disable-next-line max-len
+    return ((isStarred = true) => getters.boards.filter((board) => board.isStarred === isStarred))();
   },
 };
 

@@ -19,12 +19,10 @@ const routes = [
           NProgress.start();
           try {
             await store.dispatch('boardsModule/obtainBoards');
-            to.params.boards = store.getters['boardsModule/boards'];
-            to.params.starredBoards = store.getters['boardsModule/starredBoards']();
             NProgress.done();
             next();
           } catch (error) {
-            console.log({ error });
+            console.log(error);
           }
         },
         component: () => import('../views/BoardsView.vue'),
