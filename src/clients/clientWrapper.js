@@ -20,3 +20,14 @@ export function makeGetRequest(url, options) {
 export function makePostRequest(url, body, options) {
   return axios.post(url, body, options);
 }
+
+/**
+ * Función para realizar una petición http tipo delete a un endpoint
+ * @param {String} url - URL
+ * @param {Object} body - Cuerpo de la solicitud
+ * @param {Object} options - Opciones de la solicitud
+ * @returns - Promesa con la respuesta
+ */
+export function makeDeleteRequest(url, options) {
+  return axios.delete(url, options);
+}

@@ -31,7 +31,12 @@ export default {
   methods: {
     async deleteBoard() {
       const response = await Swal.fire({
-        title: `Deleting board with name ${this.board.name}`, text: 'Do you want to continue?', icon: 'warning', confirmButtonText: 'Delete', showCancelButton: true, cancelButtonText: 'Cancel',
+        title: `Deleting board with name ${this.board.name}`,
+        text: 'Do you want to continue?',
+        icon: 'warning',
+        confirmButtonText: 'Delete',
+        showCancelButton: true,
+        cancelButtonText: 'Cancel',
       });
       if (response.isConfirmed) {
         console.log('Borrando');

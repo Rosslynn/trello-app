@@ -1,4 +1,4 @@
-import { makeGetRequest } from '../clients/clientWrapper';
+import { makeGetRequest, makeDeleteRequest, makePostRequest } from '../clients/clientWrapper';
 
 const baseURL = 'http://localhost:3000';
 
@@ -18,5 +18,10 @@ export function getBoards() {
  */
 export function addBoard(body) {
   const url = `${baseURL}/boards`;
-  return makeGetRequest(url, body);
+  return makePostRequest(url, body);
+}
+
+export function deleteBoard(id) {
+  const url = `${baseURL}/boards/${id}`;
+  return makeDeleteRequest(url);
 }
