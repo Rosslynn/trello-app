@@ -1,10 +1,11 @@
+<!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
-  <input v-bind="$attrs" v-on="listeners" :value="value" @input="updateValue">
+  <textarea v-bind="$attrs" v-on="listeners" :value="value" @input="updateValue"></textarea>
 </template>
 
 <script>
 export default {
-  name: 'BaseInput',
+  name: 'BaseTextArea',
   props: {
     value: {
       type: String,

@@ -1,13 +1,17 @@
 /* eslint-disable no-shadow */
-import { getBoards, deleteBoard } from '../../services/boardsService';
+import { getBoards, deleteBoard, getBoardById } from '../../services/boardsService';
 
 const state = () => ({
   boards: [],
+  board: null,
 });
 
 const mutations = {
   SET_BOARDS(state, boards) {
     state.boards = boards;
+  },
+  SET_BOARD(state, board) {
+    state.board = board;
   },
 };
 
@@ -23,6 +27,11 @@ const actions = {
     } catch (error) {
       console.log(error);
     }
+  },
+  async getSingleBoard({ commit }, boardId) {
+    const { data } = await getBoardById(boardId);
+    commit('SET_BOARD', data);
+    return { ...data };
   },
 };
 

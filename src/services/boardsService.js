@@ -25,3 +25,8 @@ export function deleteBoard(id) {
   const url = `${baseURL}/boards/${id}`;
   return makeDeleteRequest(url);
 }
+
+export function getBoardById(id) {
+  const url = `${baseURL}/boards/${id}`;
+  return makeGetRequest(url);
+}

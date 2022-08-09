@@ -3,6 +3,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import NProgress from 'nprogress';
 import store from '../store/index';
+import { getBoardById } from '../services/boardsService';
 
 Vue.use(VueRouter);
 
@@ -14,7 +15,6 @@ const routes = [
       {
         path: '',
         name: 'boards-view',
-        props: true,
         async beforeEnter(to, from, next) {
           NProgress.start();
           try {
@@ -36,10 +36,29 @@ const routes = [
       {
         path: ':id/edit',
         name: 'edit-board',
-        component: () => import('../views/EditBoardView.vue'),
         props: true,
+        async beforeEnter(to, from, next) {
+          NProgress.start();
+          try {
+            const { id } = to.params;
+            const { data } = await getBoardById(id);
+            to.params.board = data;
+            NProgress.done();
+            next();
+          } catch (error) {
+            next({ name: 'not-found-view', params: { resource: 'board' } });
+            console.log(error);
+          }
+        },
+        component: () => import('../views/EditBoardView.vue'),
       },
     ],
+  },
+  {
+    path: '/404',
+    name: 'not-found-view',
+    props: true,
+    component: () => import('../views/NotFoundView.vue'),
   },
   {
     path: '*',
