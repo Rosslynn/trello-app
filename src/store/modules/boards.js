@@ -1,5 +1,7 @@
 /* eslint-disable no-shadow */
-import { getBoards, deleteBoard, getBoardById } from '../../services/boardsService';
+import {
+  getBoards, deleteBoard, getBoardById, updateBoardById,
+} from '../../services/boardsService';
 
 const state = () => ({
   boards: [],
@@ -32,6 +34,10 @@ const actions = {
     const { data } = await getBoardById(boardId);
     commit('SET_BOARD', data);
     return { ...data };
+  },
+  async updateSingleBoard({ commit }, { id, body }) {
+    const { data } = await updateBoardById({ id, body });
+    commit('SET_BOARD', data);
   },
 };
 

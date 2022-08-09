@@ -2,11 +2,25 @@
 import Vue from 'vue';
 import upperFirst from 'lodash/upperFirst';
 import camelCase from 'lodash/camelCase';
+import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
+import { required, min } from 'vee-validate/dist/rules';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 
 Vue.config.productionTip = false;
+
+Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);
+
+extend('required', {
+  ...required,
+  message: '{_field_} is required',
+});
+extend('min', {
+  ...min,
+  message: 'The min length of the field {_field_} must be {length}',
+});
 
 const requireComponent = require.context(
   // The relative path of the components folder

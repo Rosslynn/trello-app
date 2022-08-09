@@ -31,3 +31,14 @@ export function makePostRequest(url, body, options) {
 export function makeDeleteRequest(url, options) {
   return axios.delete(url, options);
 }
+
+/**
+ * Función para realizar una petición http tipo put a un endpoint
+ * @param {String} url - URL
+ * @param {Object} body - Cuerpo de la solicitud
+ * @param {Object} options - Opciones de la solicitud
+ * @returns - Promesa con la respuesta
+ */
+export function makePutRequest(url, options) {
+  return axios.put(url, options);
+}

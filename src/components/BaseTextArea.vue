@@ -13,7 +13,6 @@ export default {
   },
   methods: {
     updateValue(e) {
-      console.log(e.target.value);
       this.$emit('input', e.target.value);
     },
   },

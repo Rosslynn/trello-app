@@ -1,4 +1,6 @@
-import { makeGetRequest, makeDeleteRequest, makePostRequest } from '../clients/clientWrapper';
+import {
+  makeGetRequest, makeDeleteRequest, makePostRequest, makePutRequest,
+} from '../clients/clientWrapper';
 
 const baseURL = 'http://localhost:3000';
 
@@ -29,4 +31,9 @@ export function deleteBoard(id) {
 export function getBoardById(id) {
   const url = `${baseURL}/boards/${id}`;
   return makeGetRequest(url);
+}
+
+export function updateBoardById({ id, body }) {
+  const url = `${baseURL}/boards/${id}`;
+  return makePutRequest(url, body);
 }
