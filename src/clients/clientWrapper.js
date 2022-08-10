@@ -39,6 +39,6 @@ export function makeDeleteRequest(url, options) {
  * @param {Object} options - Opciones de la solicitud
  * @returns - Promesa con la respuesta
  */
-export function makePutRequest(url, options) {
-  return axios.put(url, options);
+export function makePutRequest(url, body, options) {
+  return axios.put(url, body, options);
 }

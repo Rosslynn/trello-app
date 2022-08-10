@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow */
-import { v4 as uuidv4 } from 'uuid';
+import Notification from '../../classes/notification';
 
 const state = () => ({
   notifications: [],
@@ -7,7 +7,7 @@ const state = () => ({
 
 const mutations = {
   SET_NOTIFICATION(state, notification) {
-    const newNotification = { ...notification, id: uuidv4() };
+    const newNotification = new Notification({ ...notification });
     state.notifications.push(newNotification);
   },
   REMOVE_NOTIFICATION(state, notificationToRemove) {
