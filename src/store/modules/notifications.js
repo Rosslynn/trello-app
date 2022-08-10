@@ -25,7 +25,11 @@ const actions = {
   },
 };
 
-const getters = {};
+const getters = {
+  notifications(state) {
+    return [...state.notifications];
+  },
+};
 
 export default {
   namespaced: true,
