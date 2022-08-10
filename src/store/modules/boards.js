@@ -33,7 +33,6 @@ const actions = {
   async getSingleBoard({ commit }, boardId) {
     const { data } = await getBoardById(boardId);
     commit('SET_BOARD', data);
-    return { ...data };
   },
   async updateSingleBoard({ commit }, { id, body }) {
     const { data } = await updateBoardById({ id, body });
@@ -44,6 +43,9 @@ const actions = {
 const getters = {
   boards(state) {
     return [...state.boards];
+  },
+  board(state) {
+    return { ...state.board };
   },
   boardsCount(_state, getters) {
     return getters.boards.length;

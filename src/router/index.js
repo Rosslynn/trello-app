@@ -3,7 +3,6 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import NProgress from 'nprogress';
 import store from '../store/index';
-import { getBoardById } from '../services/boardsService';
 
 Vue.use(VueRouter);
 
@@ -41,8 +40,11 @@ const routes = [
           NProgress.start();
           try {
             const { id } = to.params;
-            const { data } = await getBoardById(id);
-            to.params.board = data;
+            await store.dispatch('boardsModule/getSingleBoard', id);
+            Object.defineProperty(to.params, 'board', {
+              enumerable: true,
+              get: () => store.getters['boardsModule/board'],
+            });
             NProgress.done();
             next();
           } catch (error) {
