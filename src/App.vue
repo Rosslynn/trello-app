@@ -6,6 +6,9 @@
    <main>
      <router-view></router-view>
    </main>
+   <footer>
+    <notifications-container></notifications-container>
+   </footer>
   </div>
 </template>
 
@@ -17,6 +20,7 @@ export default {
   name: 'App',
   components: {
     HeaderComponent,
+    NotificationsContainer: () => import('./components/NotificationsContainer.vue'),
   },
 };
 </script>

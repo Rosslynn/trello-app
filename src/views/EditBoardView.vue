@@ -76,7 +76,7 @@ export default {
           this.HideNotUpdatedText();
           return;
         }
-        const { id, isStarred, ...body } = this.editableBoard;
+        const { id, ...body } = this.editableBoard;
         await this.$store.dispatch('boardsModule/updateSingleBoard', { id, body });
         this.wasUpdated = true;
         // TODO: Crear sistema de notificaciones y quitar estos timers
