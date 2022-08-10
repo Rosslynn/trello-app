@@ -1,6 +1,10 @@
 <template>
   <div class="container">
     <div class="row">
+      <div class="col-12 text-right">
+        <h2>TODO: CREAR MODAL PARA CREAR TABLA</h2>
+        <base-button class="btn btn-primary">Add table</base-button>
+      </div>
       <div class="col-12">
         <boards-container-component
           title="My starred"

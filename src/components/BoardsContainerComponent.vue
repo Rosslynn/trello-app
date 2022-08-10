@@ -6,6 +6,7 @@
       </div>
       <div class="col-12 d-flex flex-wrap justify-content-between">
         <board-component  v-for="board in boards" :key="board.id" :board="board"></board-component>
+        <p v-if="boards.length === 0" class="text-info">Nothing to show here... :)</p>
       </div>
     </div>
   </div>
