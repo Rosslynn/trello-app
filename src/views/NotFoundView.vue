@@ -20,5 +20,9 @@ export default {
       NProgress.done();
     });
   },
+  beforeRouteLeave(to, from, next) {
+    NProgress.done();
+    next();
+  },
 };
 </script>

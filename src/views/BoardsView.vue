@@ -18,15 +18,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
 export default {
   name: 'BoardsView',
-  computed: {
-    ...mapGetters('boardsModule', [
-      'boards',
-      'starredBoards',
-    ]),
+  props: {
+    boards: {
+      type: Array,
+      required: true,
+    },
+    starredBoards: {
+      type: Array,
+      required: true,
+    },
   },
   components: {
     BoardsContainerComponent: () => import('../components/BoardsContainerComponent.vue'),

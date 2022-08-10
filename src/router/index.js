@@ -4,6 +4,8 @@ import VueRouter from 'vue-router';
 import NProgress from 'nprogress';
 import store from '../store/index';
 
+import { defineReactiveProperty } from '../utils/index';
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -14,13 +16,17 @@ const routes = [
       {
         path: '',
         name: 'boards-view',
+        props: true,
         async beforeEnter(to, from, next) {
           NProgress.start();
           try {
             await store.dispatch('boardsModule/obtainBoards');
+            defineReactiveProperty(to.params, 'boards', 'boardsModule/boards');
+            defineReactiveProperty(to.params, 'starredBoards', 'boardsModule/starredBoards');
             NProgress.done();
             next();
           } catch (error) {
+            next({ name: 'not-found-view' });
             console.log(error);
           }
         },
@@ -41,10 +47,7 @@ const routes = [
           try {
             const { id } = to.params;
             await store.dispatch('boardsModule/getSingleBoard', id);
-            Object.defineProperty(to.params, 'board', {
-              enumerable: true,
-              get: () => store.getters['boardsModule/board'],
-            });
+            defineReactiveProperty(to.params, 'board', 'boardsModule/board');
             NProgress.done();
             next();
           } catch (error) {
