@@ -1,5 +1,5 @@
 <template>
-  <div class="notifications-container pt-3">
+  <div class="notifications-container pt-3" style="z-index: 99999999 !important;">
     <notification-component
       v-for="notification of notifications"
       :key="notification.id"

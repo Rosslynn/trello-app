@@ -8,13 +8,13 @@
           <div class="row">
             <validation-provider name="board-name" rules="required|min:2" v-slot="{ errors }" slim>
               <div class="col-12 mb-3">
-                <base-input v-model="editableBoard.name" type="text" class="form-control" placeholder="Name"></base-input>
+                <base-input v-model="editableBoard.name" type="text" placeholder="Name" label="Name"></base-input>
                 <p class="text-danger mb-0 mt-2">{{ errors[0] }}</p>
               </div>
             </validation-provider>
             <validation-provider name="board-description" rules="required|min:2"  v-slot="{ errors }" slim>
               <div class="col-12 mb-3">
-                <base-text-area type="text" v-model="editableBoard.description" class="form-control"
+                <base-text-area type="text" v-model="editableBoard.description" label="Description"
                   placeholder="Description"></base-text-area>
                   <p class="text-danger mb-0 mt-2">{{ errors[0] }}</p>
               </div>

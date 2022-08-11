@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-12 text-right">
-        <h2>TODO: CREAR MODAL PARA CREAR TABLA</h2>
-        <base-button class="btn btn-primary">Add table</base-button>
+      <div class="col-12">
+        <add-table-component></add-table-component>
       </div>
       <div class="col-12">
+        <h2>Crear funcionalidad de añadir a favoritos</h2>
         <boards-container-component
           title="My starred"
           :boards="starredBoards">
@@ -35,11 +35,8 @@ export default {
     },
   },
   components: {
+    AddTableComponent: () => import('../components/AddTableComponent.vue'),
     BoardsContainerComponent: () => import('../components/BoardsContainerComponent.vue'),
   },
 };
 </script>
-
-<style
-    BoardsContainerComponent>
-    </style>

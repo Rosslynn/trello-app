@@ -1,7 +1,8 @@
 /* eslint-disable no-shadow */
 import {
-  getBoards, deleteBoard, getBoardById, updateBoardById,
+  getBoards, deleteBoard, getBoardById, updateBoardById, addBoard,
 } from '../../services/boardsService';
+import Board from '../../classes/board';
 
 const state = () => ({
   boards: [],
@@ -14,6 +15,9 @@ const mutations = {
   },
   SET_BOARD(state, board) {
     state.board = board;
+  },
+  PUSH_BOARD(state, board) {
+    state.boards.push(board);
   },
 };
 
@@ -37,6 +41,11 @@ const actions = {
   async updateSingleBoard({ commit }, { id, body }) {
     const { data } = await updateBoardById({ id, body });
     commit('SET_BOARD', data);
+  },
+  async createBoard({ commit }, boardData) {
+    const newBoard = new Board({ ...boardData });
+    const { data } = await addBoard(newBoard);
+    commit('PUSH_BOARD', data);
   },
 };
 

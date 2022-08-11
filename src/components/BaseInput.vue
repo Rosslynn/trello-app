@@ -1,5 +1,10 @@
+<!-- eslint-disable vuejs-accessibility/label-has-for -->
+<!-- eslint-disable max-len -->
 <template>
-  <input v-bind="$attrs" v-on="listeners" :value="value" @input="updateValue">
+  <div>
+    <label v-if="label"> {{ label }}</label>
+    <input v-bind="$attrs" v-on="listeners" :value="value" @input="updateValue" class="form-control">
+  </div>
 </template>
 
 <script>
@@ -7,6 +12,9 @@ export default {
   name: 'BaseInput',
   props: {
     value: {
+      type: String,
+    },
+    label: {
       type: String,
     },
   },

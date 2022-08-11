@@ -30,16 +30,21 @@ export default {
   },
   methods: {
     async deleteBoard() {
-      const response = await Swal.fire({
-        title: `Deleting board with name ${this.board.name}`,
-        text: 'Do you want to continue?',
-        icon: 'warning',
-        confirmButtonText: 'Delete',
-        showCancelButton: true,
-        cancelButtonText: 'Cancel',
-      });
-      if (response.isConfirmed) {
-        this.$store.dispatch('boardsModule/removeBoard', this.board.id);
+      try {
+        const response = await Swal.fire({
+          title: `Deleting board with name ${this.board.name}`,
+          text: 'Do you want to continue?',
+          icon: 'warning',
+          confirmButtonText: 'Delete',
+          showCancelButton: true,
+          cancelButtonText: 'Cancel',
+        });
+        if (response.isConfirmed) {
+          await this.$store.dispatch('boardsModule/removeBoard', this.board.id);
+          this.$store.dispatch('notificationsModule/addNotification', { type: 'success', message: 'The board was deleted succcesfully' });
+        }
+      } catch (error) {
+        this.$store.dispatch('notificationsModule/addNotification', { type: 'danger', message: 'There was a problem deleting the board. Please try again later' });
       }
     },
   },
