@@ -5,7 +5,6 @@
         <add-table-component></add-table-component>
       </div>
       <div class="col-12">
-        <h2>Crear funcionalidad de añadir a favoritos</h2>
         <boards-container-component
           title="My starred"
           :boards="starredBoards">

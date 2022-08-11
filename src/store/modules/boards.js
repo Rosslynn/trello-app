@@ -19,6 +19,9 @@ const mutations = {
   PUSH_BOARD(state, board) {
     state.boards.push(board);
   },
+  REPLACE_BOARD(state, { newBoard, indexInTables }) {
+    state.boards.splice(indexInTables, 1, newBoard);
+  },
 };
 
 const actions = {
@@ -27,20 +30,25 @@ const actions = {
     commit('SET_BOARDS', data);
   },
   async removeBoard({ commit, state }, boardId) {
-    try {
-      await deleteBoard(boardId);
-      commit('SET_BOARDS', state.boards.filter((board) => board.id !== boardId));
-    } catch (error) {
-      console.log(error);
-    }
+    await deleteBoard(boardId);
+    commit('SET_BOARDS', state.boards.filter((board) => board.id !== boardId));
   },
   async getSingleBoard({ commit }, boardId) {
     const { data } = await getBoardById(boardId);
     commit('SET_BOARD', data);
   },
-  async updateSingleBoard({ commit }, { id, body }) {
+  async updateSingleBoard({ commit, getters, dispatch }, { id, body, toggleFavorite = false }) {
     const { data } = await updateBoardById({ id, body });
-    commit('SET_BOARD', data);
+    if (toggleFavorite) {
+      const boardToReplaceIndex = getters.boards.findIndex((board) => board.id === data.id);
+      if (boardToReplaceIndex >= 0) {
+        commit('REPLACE_BOARD', { newBoard: data, indexInTables: boardToReplaceIndex });
+      } else {
+        dispatch('notificationsModule/addNotification', { type: 'danger', message: 'Was not possible to replace the updated board. Refresh the page' }, { root: true });
+      }
+    } else {
+      commit('SET_BOARD', data);
+    }
   },
   async createBoard({ commit }, boardData) {
     const newBoard = new Board({ ...boardData });

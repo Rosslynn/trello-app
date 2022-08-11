@@ -71,7 +71,7 @@ export default {
         await this.$store.dispatch('boardsModule/updateSingleBoard', { id, body });
         this.$store.dispatch('notificationsModule/addNotification', { type: 'success', message: 'The board was updated succcesfully' });
       } catch (error) {
-        console.log(error);
+        this.$store.dispatch('notificationsModule/addNotification', { type: 'danger', message: 'Was not possible to update the board. Please try again later' });
       }
     },
   },

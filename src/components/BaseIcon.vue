@@ -25,6 +25,9 @@ export default {
     color: {
       type: String,
     },
+    fill: {
+      type: String,
+    },
   },
   computed: {
     svgIcon() {
@@ -32,6 +35,7 @@ export default {
         width: this.width,
         height: this.height,
         color: this.color,
+        fill: this.fill,
       });
     },
   },
