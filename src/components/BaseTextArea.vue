@@ -9,29 +9,11 @@
 </template>
 
 <script>
+import baseElementsMixin from '../mixins/baseElementsMixin';
+
 export default {
   name: 'BaseTextArea',
-  props: {
-    value: {
-      type: String,
-    },
-    label: {
-      type: String,
-    },
-  },
-  methods: {
-    updateValue(e) {
-      this.$emit('input', e.target.value);
-    },
-  },
-  computed: {
-    listeners() {
-      return {
-        ...this.$listeners,
-        input: this.updateValue,
-      };
-    },
-  },
+  mixins: [baseElementsMixin],
 };
 </script>
 

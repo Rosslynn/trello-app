@@ -13,32 +13,15 @@
 </template>
 
 <script>
+import baseElementsMixin from '../mixins/baseElementsMixin';
+
 export default {
   name: 'BaseSelect',
-  inheritAttrs: false,
+  mixins: [baseElementsMixin],
   props: {
-    value: {
-      type: [String, Number, Boolean],
-    },
-    label: {
-      type: String,
-    },
     options: {
       type: Array,
       required: true,
-    },
-  },
-  methods: {
-    updateValue(e) {
-      this.$emit('input', Boolean(e.target.value));
-    },
-  },
-  computed: {
-    listeners() {
-      return {
-        ...this.$listeners,
-        input: this.updateValue,
-      };
     },
   },
 };
