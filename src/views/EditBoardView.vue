@@ -31,6 +31,7 @@
 
 <script>
 import _ from 'lodash';
+import NProgress from 'nprogress';
 
 export default {
   name: 'EditBoardView',
@@ -65,14 +66,17 @@ export default {
 
         if (isEqual) {
           this.$store.dispatch('notificationsModule/addNotification', { type: 'danger', message: 'The form was not updated. The request was not submitted' });
+          NProgress.done();
           return;
         }
+        NProgress.start();
         const { id, ...body } = this.editableBoard;
         await this.$store.dispatch('boardsModule/updateSingleBoard', { id, body });
         this.$store.dispatch('notificationsModule/addNotification', { type: 'success', message: 'The board was updated succcesfully' });
       } catch (error) {
         this.$store.dispatch('notificationsModule/addNotification', { type: 'danger', message: 'Was not possible to update the board. Please try again later' });
       }
+      NProgress.done();
     },
   },
 };

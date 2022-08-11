@@ -44,7 +44,7 @@ const actions = {
       if (boardToReplaceIndex >= 0) {
         commit('REPLACE_BOARD', { newBoard: data, indexInTables: boardToReplaceIndex });
       } else {
-        dispatch('notificationsModule/addNotification', { type: 'danger', message: 'Was not possible to replace the updated board. Refresh the page' }, { root: true });
+        dispatch('notificationsModule/addNotification', { type: 'danger', message: 'Was not possible to replace the updated board. Refresh the page and try again' }, { root: true });
       }
     } else {
       commit('SET_BOARD', data);

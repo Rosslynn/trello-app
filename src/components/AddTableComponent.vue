@@ -86,6 +86,7 @@ export default {
           this.$store.dispatch('notificationsModule/addNotification', { type: 'info', message: 'The form is not valid, check the fields and try again' });
           return;
         }
+        NProgress.start();
         await this.$store.dispatch('boardsModule/createBoard', this.newBoard);
         this.$store.dispatch('notificationsModule/addNotification', { type: 'success', message: 'The board was created succcesfully' });
         this.$refs.closeModal.$el.click();

@@ -42,7 +42,7 @@ export default {
       try {
         const isStarred = !this.board.isStarred;
         const message = (isStarred) ? `${this.board.name} was added to favorites` : `${this.board.name} was removed from favorites`;
-        this.$store.dispatch('boardsModule/updateSingleBoard', { id: this.board.id, body: { ...this.board, isStarred }, toggleFavorite: true });
+        await this.$store.dispatch('boardsModule/updateSingleBoard', { id: this.board.id, body: { ...this.board, isStarred }, toggleFavorite: true });
         this.$store.dispatch('notificationsModule/addNotification', { type: 'info', message });
       } catch (error) {
         this.$store.dispatch('notificationsModule/addNotification', { type: 'danger', message: 'Was not possible to do this. Please try again later' });

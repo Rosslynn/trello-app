@@ -19,6 +19,7 @@
 
 <script>
 import Swal from 'sweetalert2';
+import NProgress from 'nprogress';
 
 export default {
   name: 'DropdownComponent',
@@ -40,12 +41,14 @@ export default {
           cancelButtonText: 'Cancel',
         });
         if (response.isConfirmed) {
+          NProgress.start();
           await this.$store.dispatch('boardsModule/removeBoard', this.board.id);
           this.$store.dispatch('notificationsModule/addNotification', { type: 'success', message: 'The board was deleted succcesfully' });
         }
       } catch (error) {
         this.$store.dispatch('notificationsModule/addNotification', { type: 'danger', message: 'There was a problem deleting the board. Please try again later' });
       }
+      NProgress.done();
     },
   },
 };
