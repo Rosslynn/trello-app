@@ -34,14 +34,17 @@ describe('BaseInput', () => {
   });
 
   describe('input', () => {
+    let input;
+    beforeEach(() => {
+      input = wrapper.find('input[data-test-id="base-input"]');
+    });
+
     it('should render the input', () => {
-      const input = wrapper.find('input[data-test-id="base-input"]');
       expect(input.exists()).toBe(true);
     });
 
     it('should emit an update event when user types', async () => {
       const valueTyped = 'mama said, dont give up its a little complicated';
-      const input = wrapper.find('input[data-test-id="base-input"]');
 
       await input.setValue(valueTyped);
       await wrapper.vm.$nextTick();
@@ -52,7 +55,6 @@ describe('BaseInput', () => {
 
     it('if a value is sent in the value property it should initially display it', async () => {
       const value = 'mathias te amo sobrino';
-      const input = wrapper.find('input[data-test-id="base-input"]');
 
       await wrapper.setProps({ value });
 

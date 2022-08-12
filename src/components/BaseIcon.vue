@@ -1,5 +1,5 @@
 <template>
-  <div v-html="svgIcon">
+  <div data-test-id="icon-wrapper" v-html="svgIcon">
 
   </div>
 </template>
