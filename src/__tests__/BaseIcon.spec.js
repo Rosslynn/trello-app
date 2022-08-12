@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-unused-vars */
 /* eslint-disable dot-notation */
 import {
   vi, describe, expect, it, beforeEach,
@@ -11,29 +13,45 @@ vi.mock('feather-icons', () => ({
   default: {
     icons: {
       heart: {
-        toSvg: vi.fn(() => mockResolveValueFeatherIcon),
+        toSvg: vi.fn((options) => mockResolveValueFeatherIcon),
       },
     },
   },
 }));
 
-beforeEach(() => {
+let feather;
+
+beforeEach(async () => {
   vi.clearAllMocks();
+  feather = await import('feather-icons');
 });
 
 describe('BaseIcon', () => {
-  it('should render an icon in svg format', async () => {
+  it(' the result of the svg function should be rendered', async () => {
     const wrapper = mount(BaseIcon, { propsData: { name: 'heart' } });
+    expect(feather.default.icons.heart.toSvg).toHaveBeenCalledOnce();
     expect(wrapper.find('div[data-test-id="icon-wrapper"]').element.innerHTML).toBe(`${mockResolveValueFeatherIcon}`);
   });
 
-  it('this test is for learning purposes', async () => {
+  it('the icon should use the styles sent through properties', async () => {
+    const iconStyles = {
+      color: 'white', fill: 'none', width: 80, height: 80,
+    };
+    const propsData = {
+      name: 'heart', ...iconStyles,
+    };
+
+    mount(BaseIcon, { propsData });
+
+    expect(feather.default.icons.heart.toSvg.calls[0]).toMatchObject([iconStyles]);
+  });
+});
+
+/* it('this test is for learning purposes', async () => {
     const mockImplementationValue = 'uwu';
-    const feather = await import('feather-icons');
 
     feather.default.icons.heart.toSvg.mockImplementationOnce(() => mockImplementationValue);
     const wrapper = mount(BaseIcon, { propsData: { name: 'heart' } });
 
     expect(wrapper.find('div[data-test-id="icon-wrapper"]').element.innerHTML).toBe(mockImplementationValue);
-  });
-});
+}); */
