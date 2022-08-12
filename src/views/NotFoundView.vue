@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div data-test-id="not-found-view">
     The {{ resource }} was not found :D
   </div>
 </template>

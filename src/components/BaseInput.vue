@@ -2,8 +2,8 @@
 <!-- eslint-disable max-len -->
 <template>
   <div>
-    <label v-if="label"> {{ label }}</label>
-    <input v-bind="$attrs" v-on="listeners" :value="value" @input="updateValue" class="form-control">
+    <label data-test-id="base-input-label" v-if="label"> {{ label }}</label>
+    <input data-test-id="base-input" v-bind="$attrs" v-on="listeners" :value="value" @input="updateValue" class="form-control">
   </div>
 </template>
 
