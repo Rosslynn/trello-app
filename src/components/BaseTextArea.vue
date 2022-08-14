@@ -3,8 +3,8 @@
 <!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
   <div>
-    <label v-if="label">{{ label }}</label>
-     <textarea v-bind="$attrs" v-on="listeners" :value="value" @input="updateValue" class="form-control"></textarea>
+    <label data-test-id="bta-label" v-if="label">{{ label }}</label>
+     <textarea data-test-id="bta-txtarea" v-bind="$attrs" v-on="listeners" :value="value" @input="updateValue" class="form-control"></textarea>
   </div>
 </template>
 
