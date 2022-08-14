@@ -16,6 +16,7 @@
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "feather-icons": "^4.29.0",
+    "flush-promises": "^1.0.2",
     "lodash": "^4.17.21",
     "nprogress": "^0.2.0",
     "sweetalert2": "^11.4.26",
