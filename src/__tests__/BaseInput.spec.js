@@ -43,7 +43,7 @@ describe('BaseInput', () => {
       expect(input.exists()).toBe(true);
     });
 
-    it('should emit an update event when user types', async () => {
+    it('should emit an input event when user types', async () => {
       const valueTyped = 'mama said, dont give up its a little complicated';
 
       await input.setValue(valueTyped);

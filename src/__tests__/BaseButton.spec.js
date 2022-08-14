@@ -6,12 +6,12 @@ describe('BaseButton', () => {
   it('should render a button', () => {
     const wrapper = mount(BaseButton);
 
-    const button = wrapper.find('button');
+    const button = wrapper.find('button[data-test-id="base-button"]');
 
     expect(button.exists()).toBe(true);
   });
 
-  it('should render the content via slot named icon and the default slot', () => {
+  it('should render content via the slot named icon and the default slot', () => {
     const wrapper = mount(BaseButton, {
       slots: {
         icon: '<span>matis te amo sobrino</span>',

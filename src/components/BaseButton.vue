@@ -1,5 +1,6 @@
+<!-- eslint-disable max-len -->
 <template>
-  <button v-bind="$attrs" v-on="$listeners"><slot name="icon"></slot><slot></slot></button>
+  <button data-test-id="base-button" v-bind="$attrs" v-on="$listeners"><slot name="icon"></slot><slot></slot></button>
 </template>
 
 <script>

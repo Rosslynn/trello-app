@@ -3,8 +3,8 @@
 <!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
  <div>
-  <label v-if="label" >{{ label }}</label>
-  <select class="form-control" :value="value" v-on="listeners" @input="updateValue" v-bind="$attrs">
+  <label data-test-id="bs-label" v-if="label" >{{ label }}</label>
+  <select data-test-id="bs-select" class="form-control" :value="value" v-on="listeners" @input="updateValue" v-bind="$attrs">
   <option :selected="value === option.value" v-for="option in options" :key="JSON.stringify(option)" :value="option.value">
     {{ option.text }}
   </option>
