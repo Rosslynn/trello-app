@@ -1,5 +1,5 @@
 <template>
-  <div class="notifications-container pt-3" style="z-index: 99999999 !important;">
+  <div data-test-id="alert-container" class="notifications-container custom-z-index pt-3">
     <notification-component
       v-for="notification of notifications"
       :key="notification.id"
@@ -30,5 +30,9 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
+}
+
+.custom-z-index {
+  z-index:  99999999 !important;
 }
 </style>

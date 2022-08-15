@@ -21,6 +21,10 @@ describe('HeaderComponent', () => {
       expect(wrapper.find('[data-test-id="logo"]').exists()).toBe(true);
     });
 
+    it('should have the navbar-brand class', () => {
+      expect(wrapper.find('[data-test-id="logo"]').classes()).toContain('navbar-brand');
+    });
+
     describe('when logo is clicked', () => {
       it('should go to the boards view', () => {
         const expectedRouteName = 'boards-view';
