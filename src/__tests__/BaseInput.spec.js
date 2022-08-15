@@ -16,7 +16,7 @@ describe('BaseInput', () => {
     describe('if label property is provided', () => {
       it('should render the label', async () => {
         await wrapper.setProps({ label: 'uwu' });
-        expect(wrapper.find('label[data-test-id="base-input-label"]').exists()).toBe(true);
+        expect(wrapper.find('label[data-test-id="base-input-label"]').isVisible()).toBe(true);
       });
 
       it('should show the provided message via the property', async () => {
@@ -40,7 +40,7 @@ describe('BaseInput', () => {
     });
 
     it('should render the input', () => {
-      expect(input.exists()).toBe(true);
+      expect(input.isVisible()).toBe(true);
     });
 
     it('should emit an input event when user types', async () => {

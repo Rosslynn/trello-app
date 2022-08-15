@@ -18,7 +18,7 @@ beforeEach(() => {
 describe('HeaderComponent', () => {
   describe('logo', () => {
     it('should render the logo', () => {
-      expect(wrapper.find('[data-test-id="logo"]').exists()).toBe(true);
+      expect(wrapper.find('[data-test-id="logo"]').isVisible()).toBe(true);
     });
 
     it('should have the navbar-brand class', () => {

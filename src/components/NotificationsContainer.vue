@@ -10,11 +10,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import NotificationComponent from './NotificationComponent.vue';
 
 export default {
   name: 'NotificationsContainer',
   components: {
-    NotificationComponent: () => import('./NotificationComponent.vue'),
+    NotificationComponent,
   },
   computed: {
     ...mapGetters('notificationsModule', [

@@ -29,7 +29,7 @@ describe('BaseSelect', () => {
   describe('label', () => {
     describe('if label property is provided', () => {
       it('should render the label', () => {
-        expect(wrapper.find('label[data-test-id="bs-label"]').exists()).toBe(true);
+        expect(wrapper.find('label[data-test-id="bs-label"]').isVisible()).toBe(true);
       });
 
       it('the text inside the label should be the same as the one sent through the property label', () => {
@@ -49,7 +49,7 @@ describe('BaseSelect', () => {
 
   describe('selector', () => {
     it('should render a selector', () => {
-      expect(wrapper.find('select[data-test-id="bs-select"]').exists()).toBe(true);
+      expect(wrapper.find('select[data-test-id="bs-select"]').isVisible()).toBe(true);
     });
 
     it('should render all the options sent through the options property', () => {

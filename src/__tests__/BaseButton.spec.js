@@ -8,7 +8,7 @@ describe('BaseButton', () => {
 
     const button = wrapper.find('button[data-test-id="base-button"]');
 
-    expect(button.exists()).toBe(true);
+    expect(button.isVisible()).toBe(true);
   });
 
   it('should render content via the slot named icon and the default slot', () => {
@@ -19,7 +19,7 @@ describe('BaseButton', () => {
       },
     });
 
-    expect(wrapper.find('span').exists()).toBe(true);
-    expect(wrapper.find('p').exists()).toBe(true);
+    expect(wrapper.find('span').isVisible()).toBe(true);
+    expect(wrapper.find('p').isVisible()).toBe(true);
   });
 });

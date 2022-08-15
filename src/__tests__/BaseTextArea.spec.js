@@ -20,7 +20,7 @@ describe('BaseTextArea', () => {
 
     describe('if label property is provided', () => {
       it('should render the label element', () => {
-        expect(wrapper.find('label[data-test-id="bta-label"]').exists()).toBe(true);
+        expect(wrapper.find('label[data-test-id="bta-label"]').isVisible()).toBe(true);
       });
 
       it('the text inside the label should be the same as the one sent through the property label', () => {
@@ -44,7 +44,7 @@ describe('BaseTextArea', () => {
     });
 
     it('should render the textarea element', () => {
-      expect(wrapper.find('textarea[data-test-id="bta-txtarea"]').exists()).toBe(true);
+      expect(wrapper.find('textarea[data-test-id="bta-txtarea"]').isVisible()).toBe(true);
     });
 
     it('should have the form-control class', () => {
