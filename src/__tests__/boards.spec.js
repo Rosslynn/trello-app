@@ -1,5 +1,19 @@
-import { describe, it, expect } from 'vitest';
+/* eslint-disable max-len */
+import {
+  describe, it, expect, vi,
+  beforeEach,
+} from 'vitest';
 import boardsModule from '../store/modules/boards';
+import {
+  getBoards, deleteBoard, getBoardById, updateBoardById,
+  addBoard,
+} from '../services/boardsService';
+
+vi.mock('../services/boardsService');
+
+beforeEach(() => {
+  vi.clearAllMocks();
+});
 
 describe('boards', () => {
   describe('mutations', () => {
@@ -70,4 +84,169 @@ describe('boards', () => {
       });
     });
   });
+
+  describe('actions', () => {
+    describe('obtainBoards', () => {
+      it('should call getBoards function and SET_BOARDS mutation', async () => {
+        const commit = vi.fn();
+        const returnedValue = {
+          data: 'mathias mi sobrino hermoso',
+        };
+
+        getBoards.mockResolvedValueOnce(returnedValue);
+        await boardsModule.actions.obtainBoards({ commit });
+
+        expect(getBoards).toHaveBeenCalledOnce();
+        expect(commit).toHaveBeenCalledWith('SET_BOARDS', returnedValue.data);
+      });
+    });
+
+    describe('removeBoard', () => {
+      it('should call deleteBoard function and SET_BOARDS mutation', async () => {
+        const state = {
+          boards: [
+            {
+              id: 1, name: 'oh oh mami dime que tu me hiciste', isStarred: false, description: 'que pasa el tiempo y no te olvido',
+            },
+            {
+              id: 2, name: 'quiero ser millonario', isStarred: true, description: 'The marias es una banda GOD',
+            },
+          ],
+        };
+        const commit = vi.fn();
+        const boardIdToRemove = state.boards[1].id;
+
+        await boardsModule.actions.removeBoard({ commit, state }, boardIdToRemove);
+
+        expect(deleteBoard).toHaveBeenCalled();
+        expect(commit).toHaveBeenCalledWith('SET_BOARDS', state.boards.filter((board) => board.id !== boardIdToRemove));
+      });
+    });
+
+    describe('getSingleBoard', () => {
+      it('should call getSingleBoard function and SET_BOARDS mutation', async () => {
+        const commit = vi.fn();
+        const resolvedValue = {
+          data: {
+            id: 1,
+            name: 'Marquardt Inc',
+            isStarred: false,
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem.',
+          },
+        };
+
+        getBoardById.mockResolvedValueOnce(resolvedValue);
+        await boardsModule.actions.getSingleBoard({ commit });
+
+        expect(getBoardById).toHaveBeenCalled();
+        expect(commit).toHaveBeenCalledWith('SET_BOARD', resolvedValue.data);
+      });
+    });
+
+    describe('updateSingleBoard', () => {
+      let getters;
+      const commit = vi.fn();
+      const dispatch = vi.fn();
+      const id = 1;
+      const body = {
+        id: 1,
+        name: 'Marquardt Inc',
+        isStarred: false,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem.',
+      };
+
+      beforeEach(() => {
+        getters = {
+          boards: [],
+        };
+      });
+
+      it('should call updateBoardById function', async () => {
+        updateBoardById.mockResolvedValueOnce({ data: 'uwu' });
+        await boardsModule.actions.updateSingleBoard({ commit, dispatch, getters }, { id, body });
+        expect(updateBoardById).toHaveBeenCalled();
+      });
+
+      describe('if toggleFavorite property was sent as true', () => {
+        describe('if boardToReplaceIndex is >= 0', () => {
+          it('should call REPLACE_BOARD mutation', async () => {
+            getters = {
+              boards: [{
+                id: 1,
+                name: 'Marquardt Inc',
+                isStarred: false,
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem.',
+              }],
+            };
+            const data = getters.boards[0];
+            const boardToReplaceIndex = getters.boards.findIndex((board) => board.id === data.id);
+
+            updateBoardById.mockResolvedValueOnce({ data });
+            await boardsModule.actions.updateSingleBoard({ commit, dispatch, getters }, { id, body, toggleFavorite: true });
+
+            expect(commit).toHaveBeenCalledWith('REPLACE_BOARD', { newBoard: data, indexInTables: boardToReplaceIndex });
+          });
+        });
+
+        describe('if boardToReplaceIndex is < 0', () => {
+          it('should dispatch notificationsModule/addNotification action', async () => {
+            getters = {
+              boards: [{
+                id: 1,
+                name: 'Marquardt Inc',
+                isStarred: false,
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem.',
+              }],
+            };
+            const data = { id: 500 };
+
+            updateBoardById.mockResolvedValueOnce({ data });
+            await boardsModule.actions.updateSingleBoard({ commit, dispatch, getters }, { id, body, toggleFavorite: true });
+
+            expect(dispatch).toHaveBeenCalledWith('notificationsModule/addNotification', { type: 'danger', message: 'Was not possible to replace the updated board. Refresh the page and try again' }, { root: true });
+          });
+        });
+      });
+
+      describe('if toggleFavorite property was sent as false', () => {
+        it('should call updateBoardById function and SET_BOARD mutation', async () => {
+          const data = 'uwu';
+
+          updateBoardById.mockResolvedValueOnce({ data });
+          await boardsModule.actions.updateSingleBoard({ commit, dispatch, getters }, { id, body, toggleFavorite: false });
+
+          expect(updateBoardById).toHaveBeenCalled();
+          expect(commit).toHaveBeenCalledWith('SET_BOARD', data);
+        });
+      });
+    });
+
+    describe('addBoard', () => {
+      it('should call addBoard function and PUSH_BOARD mutation', async () => {
+        const commit = vi.fn();
+        const newBoard = { name: 'board name', description: 'board description' };
+        const resolvedValue = 'mathis te amo';
+
+        addBoard.mockResolvedValueOnce({ data: resolvedValue });
+        await boardsModule.actions.createBoard({ commit }, newBoard);
+
+        expect(addBoard).toHaveBeenCalled();
+        expect(commit).toHaveBeenCalledWith('PUSH_BOARD', resolvedValue);
+      });
+    });
+  });
 });
+
+/* describe('obtainBoards', () => {
+  it('should call getBoards function and SET_BOARDS mutation', async () => {
+    const commit = vi.fn();
+    const returnedValue = {
+      data: 'mathias mi sobrino hermoso',
+    };
+    const getBoardsSpy = vi.spyOn(boardsService, 'getBoards').mockResolvedValue(returnedValue);
+    await boardsModule.actions.obtainBoards({ commit });
+
+    expect(getBoardsSpy).toHaveBeenCalled();
+    expect(commit).toHaveBeenCalledWith('SET_BOARDS', returnedValue.data);
+  });
+}); */
