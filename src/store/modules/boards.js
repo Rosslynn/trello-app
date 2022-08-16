@@ -69,7 +69,7 @@ const getters = {
   },
   starredBoards(_state, getters) {
     // eslint-disable-next-line max-len
-    return ((isStarred = true) => getters.boards.filter((board) => board.isStarred === isStarred))();
+    return (isStarred = true) => getters.boards.filter((board) => board.isStarred === isStarred);
   },
 };
 

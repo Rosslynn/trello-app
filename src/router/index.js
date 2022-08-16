@@ -21,8 +21,10 @@ const routes = [
           NProgress.start();
           try {
             await store.dispatch('boardsModule/obtainBoards');
-            defineReactiveProperty(to.params, 'boards', 'boardsModule/boards');
-            defineReactiveProperty(to.params, 'starredBoards', 'boardsModule/starredBoards');
+            defineReactiveProperty({ objectToAddProperty: to.params, propertyName: 'boards', valueToShow: 'boardsModule/boards' });
+            defineReactiveProperty({
+              objectToAddProperty: to.params, propertyName: 'starredBoards', valueToShow: 'boardsModule/starredBoards', isFunction: true,
+            });
             NProgress.done();
             next();
           } catch (error) {
@@ -47,7 +49,7 @@ const routes = [
           try {
             const { id } = to.params;
             await store.dispatch('boardsModule/getSingleBoard', id);
-            defineReactiveProperty(to.params, 'board', 'boardsModule/board');
+            defineReactiveProperty({ objectToAddProperty: to.params, propertyName: 'board', valueToShow: 'boardsModule/board' });
             NProgress.done();
             next();
           } catch (error) {

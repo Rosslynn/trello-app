@@ -235,6 +235,75 @@ describe('boards', () => {
       });
     });
   });
+
+  describe('getters', () => {
+    const state = {
+      boards: [
+        {
+          id: 1,
+          name: 'Marquardt Inc',
+          isStarred: false,
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem.',
+        },
+        {
+          id: 2,
+          name: 'Otro lorem ipsum',
+          isStarred: true,
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem.',
+        },
+        {
+          id: 3,
+          name: 'Lorem ipsum',
+          isStarred: false,
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem.',
+        },
+      ],
+      board: {
+        id: 100,
+        name: 'Mangekyo sharingan',
+        isStarred: true,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem.',
+      },
+    };
+
+    describe('boards', () => {
+      it('should return the boards list in the state', () => {
+        const result = boardsModule.getters.boards(state);
+        expect(result).toEqual(state.boards);
+      });
+    });
+
+    describe('board', () => {
+      it('should return the board in the state', () => {
+        const result = boardsModule.getters.board(state);
+        expect(result).toEqual(state.board);
+      });
+    });
+
+    describe('boardsCount', () => {
+      it('should return the number of boards in the state', () => {
+        const getters = {
+          boards: state.boards,
+        };
+        const boardsCount = boardsModule.getters.boardsCount(state, getters);
+        expect(boardsCount).toBe(state.boards.length);
+      });
+    });
+
+    describe('starredBoards', () => {
+      it('it should return the starred boards in the state', () => {
+        const getters = {
+          boards: state.boards,
+        };
+        const isStarred = false;
+        const expecetedResult = getters.boards.filter((board) => board.isStarred === isStarred);
+
+        const result = boardsModule.getters.starredBoards(state, getters)(isStarred);
+
+        expect(result).toEqual(expecetedResult);
+      });
+    });
+  });
 });
 
 /* describe('obtainBoards', () => {
