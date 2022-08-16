@@ -1,6 +1,6 @@
 <!-- eslint-disable max-len -->
 <template>
-  <div class="card text-white mb-4" :class="randomClass" style="max-width: 18rem;">
+  <div data-test-id="board-container" class="card text-white mb-4" :class="randomClass" style="max-width: 18rem;">
     <div class="card-header position-relative">
       <p class="mb-0">
         <router-link :to="{ name: 'single-board-view', params: { id: board.id } }">
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import DropdownComponent from './DropdownComponent.vue';
+
 export default {
   name: 'BoardComponent',
   data() {
@@ -70,7 +72,7 @@ export default {
     },
   },
   components: {
-    DropdownComponent: () => import('./DropdownComponent.vue'),
+    DropdownComponent,
   },
 };
 </script>
