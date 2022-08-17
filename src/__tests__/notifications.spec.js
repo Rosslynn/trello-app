@@ -1,7 +1,12 @@
 import {
   describe, expect, it, vi,
+  beforeEach,
 } from 'vitest';
 import notifications from '../store/modules/notifications';
+
+beforeEach(() => {
+  vi.clearAllMocks();
+});
 
 describe('notifications', () => {
   describe('mutations', () => {

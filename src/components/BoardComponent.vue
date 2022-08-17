@@ -3,18 +3,18 @@
   <div data-test-id="board-container" class="card text-white mb-4" :class="randomClass" style="max-width: 18rem;">
     <div class="card-header position-relative">
       <p class="mb-0">
-        <router-link :to="{ name: 'single-board-view', params: { id: board.id } }">
+        <router-link data-test-id="more-information" :to="{ name: 'single-board-view', params: { id: board.id } }">
           {{ board.name }}
         </router-link>
       </p>
       <dropdown-component :board="board"></dropdown-component>
     </div>
     <div class="card-body">
-      <h5 class="card-title">BCIMIAMI - {{ board.id }}</h5>
-      <p class="card-text">{{ board.description }}</p>
-      <base-button class="btn btn-link" @click="toggleFavorite">
+      <h5 class="card-title" data-test-id="board-title">BCIMIAMI - {{ board.id }}</h5>
+      <p class="card-text" data-test-id="board-description">{{ board.description }}</p>
+      <base-button data-test-id="toggle-favorite-button" class="btn btn-link" @click="toggleFavorite">
         <template name="icon">
-          <base-icon name="heart" :color="borderColor" :fill="colorToFill"></base-icon>
+          <base-icon data-test-id="toggle-favorite-icon" name="heart" :color="borderColor" :fill="colorToFill"></base-icon>
         </template>
       </base-button>
     </div>
