@@ -182,8 +182,17 @@ describe('BoardCompoent', () => {
         });
       });
 
-      describe.todo('if toggleFavorite method fails', () => {
+      describe('if toggleFavorite method fails', () => {
         it('should dispatch a notification telling the user that it failed', async () => {
+          const button = wrapper.find('[data-test-id="toggle-favorite-button"]');
+          // Le pongo el error al dispatch para que entre al try catch y por último verifico que efectivamente llame la alerta correspondiente
+          store.dispatch = vi.fn().mockImplementationOnce(() => {
+            throw new Error('asdfsda');
+          });
+
+          await button.trigger('click');
+
+          expect(store.dispatch).toHaveBeenLastCalledWith('notificationsModule/addNotification', { type: 'danger', message: 'Was not possible to do this. Please try again later' });
         });
       });
     });
