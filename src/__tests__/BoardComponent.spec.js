@@ -187,7 +187,7 @@ describe('BoardCompoent', () => {
           const button = wrapper.find('[data-test-id="toggle-favorite-button"]');
           // Le pongo el error al dispatch para que entre al try catch y por último verifico que efectivamente llame la alerta correspondiente
           store.dispatch = vi.fn().mockImplementationOnce(() => {
-            throw new Error('asdfsda');
+            throw new Error('im just an error');
           });
 
           await button.trigger('click');
