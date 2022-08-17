@@ -186,7 +186,7 @@ describe('BoardCompoent', () => {
         it('should dispatch a notification telling the user that it failed', async () => {
           const button = wrapper.find('[data-test-id="toggle-favorite-button"]');
           // Le pongo el error al dispatch para que entre al try catch y por último verifico que efectivamente llame la alerta correspondiente
-          store.dispatch = vi.fn().mockImplementationOnce(() => {
+          store.dispatch.mockImplementationOnce(() => {
             throw new Error('im just an error');
           });
 
