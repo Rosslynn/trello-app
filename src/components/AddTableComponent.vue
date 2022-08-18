@@ -26,7 +26,6 @@
                     </base-input>
                     <p class="text-danger mb-0 mt-2">{{ errors[0] }}</p>
                   </div>
-                  {{ newBoard }}
                 </validation-provider>
                 <validation-provider name="board-is-starred" rules="required" v-slot="{ errors }" slim>
                   <div class="col-12 mb-3">

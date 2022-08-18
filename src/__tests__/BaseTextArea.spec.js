@@ -23,8 +23,8 @@ describe('BaseTextArea', () => {
         expect(wrapper.find('label[data-test-id="bta-label"]').isVisible()).toBe(true);
       });
 
-      it('the text inside the label should be the same as the one sent through the property label', () => {
-        expect(wrapper.find('label[data-test-id="bta-label"]').text()).toBe(label);
+      it('the text inside the label should contain the text sent through the property label', () => {
+        expect(wrapper.find('label[data-test-id="bta-label"]').text()).toContain(label);
       });
     });
 
