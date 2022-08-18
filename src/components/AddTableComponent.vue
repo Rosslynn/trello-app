@@ -2,12 +2,12 @@
 <template>
   <div>
     <div class="text-right">
-      <base-button class="btn btn-primary" data-toggle="modal" data-target="#addBoardCenter">
+      <base-button data-test-id="btn-add-table" class="btn btn-primary" data-toggle="modal" data-target="#addBoardCenter">
         Add table
       </base-button>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="addBoardCenter" tabindex="-1" role="dialog" aria-labelledby="addBoardCenterTitle"
+    <div data-test-id="modal-container" class="modal fade" id="addBoardCenter" tabindex="-1" role="dialog" aria-labelledby="addBoardCenterTitle"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -22,20 +22,20 @@
               <div class="row">
                 <validation-provider name="board-name" rules="required|min:2" v-slot="{ errors }" slim>
                   <div class="col-12 mb-3">
-                    <base-input v-model="newBoard.name" type="text" label="Name" placeholder="Name">
+                    <base-input id="input-name" v-model="newBoard.name" type="text" label="Name" placeholder="Name">
                     </base-input>
                     <p class="text-danger mb-0 mt-2">{{ errors[0] }}</p>
                   </div>
                 </validation-provider>
                 <validation-provider name="board-is-starred" rules="required" v-slot="{ errors }" slim>
                   <div class="col-12 mb-3">
-                    <base-select label="Is starred" :options="favoriteOptions" v-model="newBoard.isStarred"></base-select>
+                    <base-select id="board-isStarred" label="Is starred" :options="favoriteOptions" v-model="newBoard.isStarred"></base-select>
                     <p class="text-danger mb-0 mt-2">{{ errors[0] }}</p>
                   </div>
                 </validation-provider>
                 <validation-provider name="board-description" rules="required|min:2" v-slot="{ errors }" slim>
                   <div class="col-12 mb-3">
-                    <base-text-area type="text" v-model="newBoard.description" label="Description"
+                    <base-text-area id="board-description" type="text" v-model="newBoard.description" label="Description"
                       placeholder="Description"></base-text-area>
                     <p class="text-danger mb-0 mt-2">{{ errors[0] }}</p>
                   </div>
