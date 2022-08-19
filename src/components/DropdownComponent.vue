@@ -1,5 +1,5 @@
 <template>
-  <div class="dropdown drop-container">
+  <div data-test-id="dropdown-container" class="dropdown drop-container">
     <base-button class="btn" type="button" data-toggle="dropdown" aria-expanded="false">
       <template #icon>
         <base-icon name="more-vertical" class="custom-icon" color="white"></base-icon>
