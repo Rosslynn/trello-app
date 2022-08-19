@@ -24,24 +24,24 @@
                   <div class="col-12 mb-3">
                     <base-input id="input-name" v-model="newBoard.name" type="text" label="Name" placeholder="Name">
                     </base-input>
-                    <p class="text-danger mb-0 mt-2">{{ errors[0] }}</p>
+                    <p class="text-error text-danger mb-0 mt-2">{{ errors[0] }}</p>
                   </div>
                 </validation-provider>
                 <validation-provider name="board-is-starred" rules="required" v-slot="{ errors }" slim>
                   <div class="col-12 mb-3">
                     <base-select id="board-isStarred" label="Is starred" :options="favoriteOptions" v-model="newBoard.isStarred"></base-select>
-                    <p class="text-danger mb-0 mt-2">{{ errors[0] }}</p>
+                    <p class="text-error text-danger mb-0 mt-2">{{ errors[0] }}</p>
                   </div>
                 </validation-provider>
                 <validation-provider name="board-description" rules="required|min:2" v-slot="{ errors }" slim>
                   <div class="col-12 mb-3">
                     <base-text-area id="board-description" type="text" v-model="newBoard.description" label="Description"
                       placeholder="Description"></base-text-area>
-                    <p class="text-danger mb-0 mt-2">{{ errors[0] }}</p>
+                    <p class="text-error text-danger mb-0 mt-2">{{ errors[0] }}</p>
                   </div>
                 </validation-provider>
                 <div class="col-12 mb-3 mt-3 text-center">
-                  <base-button type="submit" class="btn btn-primary w-100">Submit</base-button>
+                  <base-button data-test-id="btn-add-table" type="submit" class="btn btn-primary w-100">Submit</base-button>
                 </div>
               </div>
             </validation-observer>
@@ -82,14 +82,16 @@ export default {
     async createBoard() {
       try {
         const { isValid } = await this.$refs.createBoardForm.validateWithInfo();
+
         if (!isValid) {
           this.$store.dispatch('notificationsModule/addNotification', { type: 'info', message: 'The form is not valid, check the fields and try again' });
           return;
         }
+
         NProgress.start();
         await this.$store.dispatch('boardsModule/createBoard', this.newBoard);
         this.$store.dispatch('notificationsModule/addNotification', { type: 'success', message: 'The board was created succcesfully' });
-        this.$refs.closeModal.$el.click();
+        this.closeTheModal();
         // eslint-disable-next-line no-multi-assign
         this.newBoard.name = this.newBoard.description = '';
         this.newBoard.isStarred = false;
@@ -100,6 +102,9 @@ export default {
         this.$store.dispatch('notificationsModule/addNotification', { type: 'danger', message: 'Was not possible to create the board. Please try again' });
       }
       NProgress.done();
+    },
+    closeTheModal() {
+      this.$refs.closeModal.$el.click();
     },
   },
 };

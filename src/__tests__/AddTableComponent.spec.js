@@ -6,14 +6,20 @@ import Vuex from 'vuex';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import { required, min } from 'vee-validate/dist/rules';
 import { createLocalVue, mount } from '@vue/test-utils';
+import flushPromises from 'flush-promises';
+import NProgress from 'nprogress';
 import BaseButton from '../components/BaseButton.vue';
 import BaseInput from '../components/BaseInput.vue';
 import BaseTextArea from '../components/BaseTextArea.vue';
 import BaseSelect from '../components/BaseSelect.vue';
 import AddTableComponent from '../components/AddTableComponent.vue';
 
+vi.mock('nprogress');
+
 const localVue = createLocalVue();
 localVue.use(Vuex);
+localVue.component('ValidationProvider', ValidationProvider);
+localVue.component('ValidationObserver', ValidationObserver);
 
 const store = new Vuex.Store();
 store.dispatch = vi.fn();
@@ -28,11 +34,9 @@ beforeEach(() => {
 describe('AddTableComponent', () => {
   let wrapper;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     wrapper = mount(AddTableComponent, {
       stubs: {
-        ValidationProvider,
-        ValidationObserver,
         BaseButton,
         BaseInput,
         BaseTextArea,
@@ -104,31 +108,84 @@ describe('AddTableComponent', () => {
         expect(boardDescription.isVisible()).toBe(true);
       });
 
-      describe.todo('submit button', () => {
-        it('should exists', () => {});
+      describe('submit button', () => {
+        it('should exists', () => {
+          const btnAddTable = wrapper.find('[data-test-id="btn-add-table"]').find('button');
+          expect(btnAddTable.isVisible()).toBe(true);
+        });
 
         describe('clicking the submit button', () => {
           describe('if the submitted form is not valid', () => {
-            it('should call the action to display a info message telling to the user that the form is invalid', () => {});
-            it('should show an error under the invalid text fields', () => {});
+            beforeEach(async () => {
+              const inputName = wrapper.findComponent('#input-name').find('input');
+              const isFavoriteSelector = wrapper.findComponent('#board-isStarred').find('select');
+              const boardDescription = wrapper.findComponent('#board-description').find('textarea');
+              const form = wrapper.find('form');
+
+              await inputName.setValue('');
+              await isFavoriteSelector.setValue();
+              await boardDescription.setValue('');
+              await form.trigger('submit.prevent');
+              await flushPromises();
+            });
+
+            it('should call the action to display a info message telling to the user that the form is invalid', async () => {
+              expect(store.dispatch).toHaveBeenCalledWith('notificationsModule/addNotification', { type: 'info', message: 'The form is not valid, check the fields and try again' });
+            });
+
+            it('should show an error under the invalid text fields', async () => {
+              const errorTexts = wrapper.findAll('.text-error');
+              expect(errorTexts.at(0).text()).toBeTruthy();
+              expect(errorTexts.at(1).text()).toBeTruthy();
+              expect(errorTexts.at(2).text()).toBeTruthy();
+            });
           });
+          // Estos tests son volatiles porque se usa createBoardForm y si esto cambia en el componente
+          // este test va a fallar pero no encontré otra forma de arreglarlo
+          describe.todo('if the submitted form is valid', () => {
+            const newBoard = {
+              name: 'new board',
+              isStarred: true,
+              description: 'the description',
+            };
 
-          describe('if the submitted form is valid', () => {
-            it('renders a loading indicator', () => {});
-            it('should call the action to add the board', () => {});
-            it('should call the action to display a success notification', () => {});
+            beforeEach(async () => {
+              wrapper.vm.$refs.createBoardForm.validateWithInfo = vi.fn().mockResolvedValueOnce({ isValid: true });
+              const form = wrapper.find('form');
 
-            it('should reset the properties to create a board', () => {});
+              await form.trigger('submit.prevent');
+              await flushPromises();
+            });
+
+            it('renders a loading indicator', async () => {
+              expect(NProgress.start).toHaveBeenCalled();
+            });
+
+            it('should call the action to add the board', async () => {
+              await wrapper.setData({
+                newBoard,
+              });
+              expect(store.dispatch).toHaveBeenCalledWith('boardsModule/createBoard', newBoard);
+            });
+
+            it('should call the action to display a success notification', () => {
+              expect(store.dispatch).toHaveBeenCalledWith('notificationsModule/addNotification', { type: 'success', message: 'The board was created succcesfully' });
+            });
+
+            it('should reset the properties to create a board', () => {
+            });
+
             it('should reset the form to create a board ', () => {});
 
-            it('should closes the modal', () => {});
+            it('should closes the modal', async () => {
+            });
           });
 
-          describe('if submitting the form fails', () => {
+          describe.todo('if submitting the form fails', () => {
             it('should call the action to display a message telling the user that was not possible to create a board', () => {});
           });
 
-          describe('when the form submission is complete and successful', () => {
+          describe.todo('when the form submission is complete and successful', () => {
             it('should stop rendering the loading indicator', () => {});
           });
         });
