@@ -1,7 +1,15 @@
 /* eslint-disable no-unused-vars */
-import { describe, it, vi } from 'vitest';
+import {
+  beforeEach,
+  describe, expect, it, vi,
+} from 'vitest';
 import Swal from 'sweetalert2';
 import NProgress from 'nprogress';
+import Vuex from 'vuex';
+import { createLocalVue, mount, RouterLinkStub } from '@vue/test-utils';
+import DropdownComponent from '../components/DropdownComponent.vue';
+import BaseButton from '../components/BaseButton.vue';
+import BaseIcon from '../components/BaseIcon.vue';
 
 vi.mock('sweetalert2', () => ({
   default: {
@@ -16,15 +24,51 @@ vi.mock('nprogress', () => ({
   },
 }));
 
+const localVue = createLocalVue();
+localVue.use(Vuex);
+
+const store = new Vuex.Store();
+store.dispatch = vi.fn();
+
+let wrapper;
+
+beforeEach(() => {
+  vi.clearAllMocks();
+  wrapper = mount(DropdownComponent, {
+    propsData: {
+      board: {
+        id: 1,
+        name: 'Marquardt Inc',
+        isStarred: false,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget ante sem.',
+      },
+    },
+    stubs: {
+      RouterLink: RouterLinkStub,
+      BaseButton,
+      BaseIcon,
+    },
+    store,
+    localVue,
+  });
+});
+
 describe('DropdownComponent', () => {
-  it('should render the dropdown container', () => {});
+  it('should render the dropdown container', () => {
+    expect(wrapper.find('[data-test-id="dropdown-container"]').isVisible()).toBe(true);
+  });
 
   describe('dropdown', () => {
     describe('button', () => {
-      it('should render the dropdown button', () => {});
+      it('should render the dropdown button', () => {
+        expect(wrapper.find('[data-toggle="dropdown"]').isVisible()).toBe(true);
+      });
 
       describe('button icon', () => {
-        it('should render the button icon', () => {});
+        it('should render the button icon', () => {
+          const iconInsideButton = wrapper.findComponent('[data-toggle="dropdown"]').findComponent('.custom-icon');
+          expect(iconInsideButton.isVisible()).toBe(true);
+        });
         it('the icon should be white', () => {});
       });
 
