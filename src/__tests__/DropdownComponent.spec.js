@@ -1,7 +1,20 @@
+/* eslint-disable no-unused-vars */
 import { describe, it, vi } from 'vitest';
+import Swal from 'sweetalert2';
+import NProgress from 'nprogress';
 
-vi.mock('sweetalert2');
-vi.mock('nprogress');
+vi.mock('sweetalert2', () => ({
+  default: {
+    fire: vi.fn((config) => Promise.resolve({ isConfirmed: true })),
+  },
+}));
+
+vi.mock('nprogress', () => ({
+  default: {
+    start: vi.fn(),
+    done: vi.fn(),
+  },
+}));
 
 describe('DropdownComponent', () => {
   it('should render the dropdown container', () => {});
