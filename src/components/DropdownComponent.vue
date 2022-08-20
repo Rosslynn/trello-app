@@ -12,7 +12,13 @@
         type="button">
         Edit
       </router-link>
-      <base-button class="dropdown-item" type="button" @click="deleteBoard">Delete</base-button>
+      <base-button
+        data-test-id="btn-delete-board"
+        class="dropdown-item"
+        type="button"
+        @click="deleteBoard">
+          Delete
+      </base-button>
     </div>
   </div>
 </template>
@@ -40,6 +46,7 @@ export default {
           showCancelButton: true,
           cancelButtonText: 'Cancel',
         });
+
         if (response.isConfirmed) {
           NProgress.start();
           await this.$store.dispatch('boardsModule/removeBoard', this.board.id);
