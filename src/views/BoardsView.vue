@@ -5,15 +5,13 @@
         <add-table-component></add-table-component>
       </div>
       <div class="col-12">
-        <boards-container-component
-          title="My starred"
-          :boards="starredBoards">
+        <boards-container-component title="My starred" :boards="starredBoards">
         </boards-container-component>
       </div>
       <div class="col-12 my-3">
-        <boards-container-component
-          title="My boards"
-          :boards="boards">
+        {{ $t('message.hello', { name: 'Mauricio' }) }}
+        <button @click="$root.$i18n.locale = 'es'">change locale</button>
+        <boards-container-component title="My boards" :boards="boards">
         </boards-container-component>
       </div>
     </div>
@@ -23,6 +21,14 @@
 <script>
 export default {
   name: 'BoardsView',
+  data() {
+    return {
+      changeUrl: '/change',
+      refundUrl: '/refund',
+      changeLimit: 15,
+      refundLimit: 30,
+    };
+  },
   props: {
     boards: {
       type: Array,

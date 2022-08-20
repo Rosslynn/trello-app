@@ -1,5 +1,6 @@
+<!-- eslint-disable max-len -->
 <template>
-  <div data-test-id="alert-container" class="notifications-container custom-z-index pt-3">
+  <div data-test-id="alert-container" class="notifications-container custom-z-index pt-3" :style="{ display: notifications.length === 0 ? 'none' : ''}">
     <notification-component
       v-for="notification of notifications"
       :key="notification.id"
