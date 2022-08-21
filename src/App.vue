@@ -31,5 +31,14 @@ export default {
 <style>
   main {
     padding: 30px 0px;
+    height: 93%;
+  }
+
+  body, html {
+    height: 100%;
+  }
+
+  #app {
+    height: 100%;
   }
 </style>
