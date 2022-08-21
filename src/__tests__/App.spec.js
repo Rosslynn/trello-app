@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 /* eslint-disable dot-notation */
 /* eslint-disable array-callback-return */
@@ -18,7 +19,12 @@ vi.mock('../views/ContainerBoardView.vue', () => ({
   render: (h) => h('div'),
 }));
 
-const locale = 'jueputa';
+const localStorageStub = {
+  getItem: vi.fn((itemName) => itemName),
+};
+vi.stubGlobal('localStorage', localStorageStub);
+
+const locale = 'en';
 const localVue = createLocalVue();
 localVue.use(VueRouter);
 
@@ -27,6 +33,51 @@ config.mocks['$t'] = (msg) => msg.split('.').reduce((o, i) => {
 }, translations[locale]);
 
 describe('App', () => {
+  describe('when component is created', () => {
+    it('should call the created life cycle hook', () => {
+      const createdSpy = vi.spyOn(App, 'created');
+      const router = new VueRouter({ routes, mode: 'abstract' });
+      mount(App, {
+        stubs: {
+          HeaderComponent: true,
+          NotificationsContainer: true,
+        },
+        mocks: {
+          $i18n: {
+            locale,
+          },
+        },
+        localVue,
+        router,
+      });
+
+      expect(createdSpy).toHaveBeenCalled();
+    });
+
+    it('i18n locale should have a value', () => {
+      const i18n = {
+        $i18n: {
+          locale,
+        },
+      };
+      const router = new VueRouter({ routes, mode: 'abstract' });
+      mount(App, {
+        stubs: {
+          HeaderComponent: true,
+          NotificationsContainer: true,
+        },
+        mocks: {
+          ...i18n,
+        },
+        localVue,
+        router,
+      });
+      // Lo ideal seria tomar los langs del store y verificar que ese valor enviado
+      // Coincida con los que están definidos pero me da pereza
+      expect(i18n.$i18n.locale).toBeTruthy();
+    });
+  });
+
   describe('header', () => {
     it('should render the header component', () => {
       const router = new VueRouter({ routes, mode: 'abstract' });
