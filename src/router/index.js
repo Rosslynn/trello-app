@@ -8,7 +8,7 @@ import { defineReactiveProperty } from '../utils/index';
 
 Vue.use(VueRouter);
 
-const routes = [
+export const routes = [
   {
     path: '/boards',
     component: () => import('../views/ContainerBoardView.vue'),
