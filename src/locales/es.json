@@ -4,5 +4,39 @@
       "boards": "Tableros",
       "search": "Buscar"
     }
+  },
+  "views": {
+    "boardsView": {
+      "boardsTitle": "Mis tableros",
+      "favoriteBoardsTitle": "Mis tableros favoritos"
+    },
+    "editBoardView": {
+      "title": "Editando el tablero '{name}'",
+      "labelName": "Nombre",
+      "labelDescription": "Descripción",
+      "submitText": "Enviar"
+    }
+  },
+  "components": {
+    "addTableComponent": {
+      "title": "Crear tablero",
+      "newTable": {
+        "title": "Creando un nuevo tablero",
+        "name": "Nombre",
+        "isFavorite": "Es favorito?",
+        "description": "Descripción",
+        "submit": "Enviar"
+      }
+    },
+    "dropdownComponent": {
+      "editText": "Editar",
+      "deleteText": "Borrar",
+      "notification": {
+        "title": "Borrando el tablero con nombre {name}",
+        "text": "¿Quieres continuar?",
+        "confirmButtonText": "Borrar",
+        "cancelButtonText": "Cancelar"
+      }
+    }
   }
 }

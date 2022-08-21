@@ -1,3 +1,4 @@
+<!-- eslint-disable max-len -->
 <template>
   <div class="container">
     <div class="row">
@@ -5,11 +6,11 @@
         <add-table-component></add-table-component>
       </div>
       <div class="col-12">
-        <boards-container-component title="My starred" :boards="starredBoards">
+        <boards-container-component :title="$t('views.boardsView.favoriteBoardsTitle')" :boards="starredBoards">
         </boards-container-component>
       </div>
       <div class="col-12 my-3">
-        <boards-container-component title="My boards" :boards="boards">
+        <boards-container-component :title="$t('views.boardsView.boardsTitle')" :boards="boards">
         </boards-container-component>
       </div>
     </div>

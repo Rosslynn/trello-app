@@ -10,14 +10,14 @@
         :to="{ name: 'edit-board', params: { id: board.id }}"
         class="dropdown-item"
         type="button">
-        Edit
+        {{ $t('components.dropdownComponent.editText') }}
       </router-link>
       <base-button
         data-test-id="btn-delete-board"
         class="dropdown-item"
         type="button"
         @click="deleteBoard">
-          Delete
+        {{ $t('components.dropdownComponent.deleteText') }}
       </base-button>
     </div>
   </div>
@@ -39,12 +39,12 @@ export default {
     async deleteBoard() {
       try {
         const response = await Swal.fire({
-          title: `Deleting board with name ${this.board.name}`,
-          text: 'Do you want to continue?',
+          title: this.$t('components.dropdownComponent.notification.title', { name: this.board.name }),
+          text: this.$t('components.dropdownComponent.notification.text'),
           icon: 'warning',
-          confirmButtonText: 'Delete',
+          confirmButtonText: this.$t('components.dropdownComponent.notification.confirmButtonText'),
           showCancelButton: true,
-          cancelButtonText: 'Cancel',
+          cancelButtonText: this.$t('components.dropdownComponent.notification.cancelButtonText'),
         });
 
         if (response.isConfirmed) {

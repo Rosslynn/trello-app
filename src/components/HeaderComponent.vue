@@ -49,6 +49,7 @@ export default {
   methods: {
     changeLanguage(language) {
       this.$root.$i18n.locale = language;
+      localStorage.setItem('lang', this.$root.$i18n.locale);
     },
   },
 };

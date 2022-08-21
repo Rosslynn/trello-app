@@ -1,3 +1,7 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable consistent-return */
+/* eslint-disable dot-notation */
+/* eslint-disable no-shadow */
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 import {
@@ -7,11 +11,15 @@ import {
 import Swal from 'sweetalert2';
 import NProgress from 'nprogress';
 import Vuex from 'vuex';
-import { createLocalVue, mount, RouterLinkStub } from '@vue/test-utils';
+import {
+  createLocalVue, mount, RouterLinkStub, config,
+} from '@vue/test-utils';
 import flushPromises from 'flush-promises';
 import DropdownComponent from '../components/DropdownComponent.vue';
 import BaseButton from '../components/BaseButton.vue';
 import BaseIcon from '../components/BaseIcon.vue';
+
+import translations from '../utils/loadMessages';
 
 vi.mock('sweetalert2', () => ({
   default: {
@@ -25,6 +33,12 @@ vi.mock('nprogress', () => ({
     done: vi.fn(),
   },
 }));
+
+const locale = 'en';
+
+config.mocks['$t'] = (msg) => msg.split('.').reduce((o, i) => {
+  if (o) return o[i];
+}, translations[locale]);
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -114,7 +128,7 @@ describe('DropdownComponent', () => {
             await flushPromises();
 
             expect(Swal.fire).toHaveBeenCalledWith({
-              title: `Deleting board with name ${board.name}`,
+              title: 'Deleting board with name {name}',
               text: 'Do you want to continue?',
               icon: 'warning',
               confirmButtonText: 'Delete',

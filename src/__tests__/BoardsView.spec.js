@@ -1,9 +1,16 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable consistent-return */
 /* eslint-disable dot-notation */
 import { describe, it, expect } from 'vitest';
 import { shallowMount, config } from '@vue/test-utils';
 import BoardsView from '../views/BoardsView.vue';
+import translations from '../utils/loadMessages';
 
-config.mocks['$t'] = (msg) => msg;
+const locale = 'es';
+
+config.mocks['$t'] = (msg) => msg.split('.').reduce((o, i) => {
+  if (o) return o[i];
+}, translations[locale]);
 
 describe('BoardsView', () => {
   it('should render one AddTableComponent and two BoardsContainerComponent', () => {

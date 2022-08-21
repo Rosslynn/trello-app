@@ -1,8 +1,45 @@
 {
+  "rules": {
+    "required": ""
+  },
   "header": {
     "menu": {
       "boards": "Boards",
       "search": "Search"
+    }
+  },
+  "views": {
+    "boardsView": {
+      "boardsTitle": "My boards",
+      "favoriteBoardsTitle": "My favorite boards"
+    },
+    "editBoardView": {
+      "title": "Editing board '{name}'",
+      "labelName": "Name",
+      "labelDescription": "Description",
+      "submitText": "Submit"
+    }
+  },
+  "components": {
+    "addTableComponent": {
+      "title": "Add table",
+      "newTable": {
+        "title": "Creating a new table",
+        "name": "Name",
+        "isFavorite": "Is favorite?",
+        "description": "Description",
+        "submit": "Submit"
+      }
+    },
+    "dropdownComponent": {
+      "editText": "Edit",
+      "deleteText": "Delete",
+      "notification": {
+        "title": "Deleting board with name {name}",
+        "text": "Do you want to continue?",
+        "confirmButtonText": "Delete",
+        "cancelButtonText": "Cancel"
+      }
     }
   }
 }

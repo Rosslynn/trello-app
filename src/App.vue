@@ -18,6 +18,9 @@ import HeaderComponent from './components/HeaderComponent.vue';
 
 export default {
   name: 'App',
+  created() {
+    this.$root.$i18n.locale = localStorage.getItem('lang') || 'en';
+  },
   components: {
     HeaderComponent,
     NotificationsContainer: () => import('./components/NotificationsContainer.vue'),

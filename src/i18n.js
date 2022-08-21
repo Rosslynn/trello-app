@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
+import validationMessagesEn from 'vee-validate/dist/locale/en.json';
+import validationMessagesEs from 'vee-validate/dist/locale/es.json';
 import store from './store';
 
 Vue.use(VueI18n);
@@ -20,6 +22,16 @@ export function loadMessages() {
       {},
     );
 
+  messages.en = {
+    ...messages.en,
+    validations: validationMessagesEn,
+  };
+
+  messages.es = {
+    ...messages.es,
+    validations: validationMessagesEs,
+  };
+
   return { messages };
 }
 
@@ -30,9 +42,5 @@ const i18n = new VueI18n({
   messages, // set locale messages
   fallbackLocale: 'en',
 });
-
-export function changeLocale(locale) {
-  i18n.locale = locale;
-}
 
 export default i18n;

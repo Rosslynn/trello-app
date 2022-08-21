@@ -55,7 +55,6 @@ describe('HeaderComponent', () => {
     it('there should be a link leading to the boards page', () => {
       const expectedRouteName = 'boards-view';
       const linkBoardsPage = wrapper.find('[data-test-id="boards" ]').props();
-      console.log(wrapper.html());
       expect(linkBoardsPage.to.name).toBe(expectedRouteName);
     });
   });

@@ -3,7 +3,7 @@
   <div>
     <div class="text-right">
       <base-button data-test-id="btn-add-table" class="btn btn-primary" data-toggle="modal" data-target="#addBoardCenter">
-        Add table
+        {{ $t('components.addTableComponent.title') }}
       </base-button>
     </div>
     <!-- Modal -->
@@ -12,7 +12,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="addBoardLongTitle">Creating a board</h5>
+            <h5 class="modal-title" id="addBoardLongTitle">{{ $t('components.addTableComponent.newTable.title') }}</h5>
             <base-button type="button" class="close" data-dismiss="modal" ref="closeModal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </base-button>
@@ -22,26 +22,26 @@
               <div class="row">
                 <validation-provider name="board-name" rules="required|min:2" v-slot="{ errors }" slim>
                   <div class="col-12 mb-3">
-                    <base-input id="input-name" v-model="newBoard.name" type="text" label="Name" placeholder="Name">
+                    <base-input id="input-name" v-model="newBoard.name" type="text" :label="$t('components.addTableComponent.newTable.name')" :placeholder="$t('components.addTableComponent.newTable.name')">
                     </base-input>
                     <p class="text-error text-danger mb-0 mt-2">{{ errors[0] }}</p>
                   </div>
                 </validation-provider>
                 <validation-provider name="board-is-starred" rules="required" v-slot="{ errors }" slim>
                   <div class="col-12 mb-3">
-                    <base-select id="board-isStarred" label="Is starred" :options="favoriteOptions" v-model="newBoard.isStarred"></base-select>
+                    <base-select id="board-isStarred" :label="$t('components.addTableComponent.newTable.isFavorite')" :options="favoriteOptions" v-model="newBoard.isStarred"></base-select>
                     <p class="text-error text-danger mb-0 mt-2">{{ errors[0] }}</p>
                   </div>
                 </validation-provider>
                 <validation-provider name="board-description" rules="required|min:2" v-slot="{ errors }" slim>
                   <div class="col-12 mb-3">
-                    <base-text-area id="board-description" type="text" v-model="newBoard.description" label="Description"
-                      placeholder="Description"></base-text-area>
+                    <base-text-area id="board-description" type="text" v-model="newBoard.description" :label="$t('components.addTableComponent.newTable.description')"
+                      :placeholder="$t('components.addTableComponent.newTable.description')"></base-text-area>
                     <p class="text-error text-danger mb-0 mt-2">{{ errors[0] }}</p>
                   </div>
                 </validation-provider>
                 <div class="col-12 mb-3 mt-3 text-center">
-                  <base-button data-test-id="btn-add-table" type="submit" class="btn btn-primary w-100">Submit</base-button>
+                  <base-button data-test-id="btn-add-table" type="submit" class="btn btn-primary w-100">{{ $t('components.addTableComponent.newTable.submit') }}</base-button>
                 </div>
               </div>
             </validation-observer>
