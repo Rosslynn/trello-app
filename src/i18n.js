@@ -31,7 +31,6 @@ export function loadMessages() {
     ...messages.es,
     validations: validationMessagesEs,
   };
-
   return { messages };
 }
 

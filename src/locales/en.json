@@ -1,6 +1,7 @@
 {
-  "rules": {
-    "required": ""
+  "fields": {
+    "board-name": "'Board name'",
+    "board-description": "'Board description'"
   },
   "header": {
     "menu": {

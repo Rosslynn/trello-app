@@ -1,4 +1,8 @@
 {
+  "fields": {
+    "board-name": "'Nombre del tablero'",
+    "board-description": "'Descripción del tablero'"
+  },
   "header": {
     "menu": {
       "boards": "Tableros",
