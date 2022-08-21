@@ -5,7 +5,7 @@ import store from './store';
 Vue.use(VueI18n);
 
 // Load all locales and remember context
-function loadMessages() {
+export function loadMessages() {
   const context = require.context('./locales', true, /[a-z0-9-_]+\.json$/i);
 
   const messages = context

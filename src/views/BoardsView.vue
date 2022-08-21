@@ -9,8 +9,6 @@
         </boards-container-component>
       </div>
       <div class="col-12 my-3">
-        {{ $t('message.hello', { name: 'Mauricio' }) }}
-        <button @click="$root.$i18n.locale = 'es'">change locale</button>
         <boards-container-component title="My boards" :boards="boards">
         </boards-container-component>
       </div>

@@ -23,14 +23,14 @@
         <div class="collapse navbar-collapse" id="navbarHeader">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <router-link data-test-id="boards" class="nav-link" :to="{ name: 'boards-view' }">Boards <span
+              <router-link data-test-id="boards" class="nav-link" :to="{ name: 'boards-view' }">{{ $t('header.menu.boards') }}<span
                   class="sr-only">(current)</span>
               </router-link>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <base-button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</base-button>
+            <input class="form-control mr-sm-2" type="search" :placeholder="$t('header.menu.search')" :aria-label="$t('header.menu.search')">
+            <base-button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{ $t('header.menu.search') }}</base-button>
           </form>
         </div>
       </div>

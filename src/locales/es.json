@@ -1,5 +1,8 @@
 {
-  "message": {
-    "hello": "Hola {name} ¿Cómo estás?"
+  "header": {
+    "menu": {
+      "boards": "Tableros",
+      "search": "Buscar"
+    }
   }
 }
