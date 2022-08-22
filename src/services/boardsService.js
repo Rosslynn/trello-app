@@ -41,3 +41,13 @@ export function updateBoardById({ id, body }) {
   const url = `${baseURL}/boards/${id}`;
   return makePutRequest(url, body);
 }
+
+export function getBoardStages(id) {
+  const url = `${baseURL}/boards/${id}/stages`;
+  return makeGetRequest(url);
+}
+
+export function getBoardStagesCards({ boardId, stageId }) {
+  const url = `${baseURL}/boards/${boardId}/stages/${stageId}/cards`;
+  return makeGetRequest(url);
+}

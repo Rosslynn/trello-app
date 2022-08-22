@@ -1,0 +1,3 @@
+{
+  "/boards/:boardId/stages/:stageId/cards": "/cards?stageId=:stageId"
+}

@@ -38,6 +38,18 @@ export const routes = [
         path: ':id',
         name: 'single-board-view',
         props: true,
+        async beforeEnter(to, from, next) {
+          NProgress.start();
+          try {
+            await store.dispatch('boardsModule/obtainBoardStages', to.params.id);
+            defineReactiveProperty({ objectToAddProperty: to.params, propertyName: 'stages', valueToShow: 'boardsModule/stages' });
+            NProgress.done();
+            next();
+          } catch (error) {
+            next({ name: 'not-found-view' });
+            console.log(error);
+          }
+        },
         component: () => import('../views/SingleBoardView.vue'),
       },
       {

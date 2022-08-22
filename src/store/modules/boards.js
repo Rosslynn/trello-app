@@ -1,12 +1,14 @@
 /* eslint-disable no-shadow */
 import {
-  getBoards, deleteBoard, getBoardById, updateBoardById, addBoard,
+  getBoards, deleteBoard, getBoardById, updateBoardById, addBoard, getBoardStages,
+  getBoardStagesCards,
 } from '../../services/boardsService';
 import Board from '../../classes/board';
 
 const state = () => ({
   boards: [],
   board: null,
+  stages: [],
 });
 
 const mutations = {
@@ -21,6 +23,9 @@ const mutations = {
   },
   REPLACE_BOARD(state, { newBoard, indexInTables }) {
     state.boards.splice(indexInTables, 1, newBoard);
+  },
+  SET_STAGES(state, stages) {
+    state.stages = stages;
   },
 };
 
@@ -55,6 +60,14 @@ const actions = {
     const { data } = await addBoard(newBoard);
     commit('PUSH_BOARD', data);
   },
+  async obtainBoardStages({ commit }, boardId) {
+    const { data } = await getBoardStages(boardId);
+    commit('SET_STAGES', data);
+  },
+  async obtainBoardStageCards(_ctx, { boardId, stageId }) {
+    const { data } = await getBoardStagesCards({ boardId, stageId });
+    return data;
+  },
 };
 
 const getters = {
@@ -70,6 +83,9 @@ const getters = {
   starredBoards(_state, getters) {
     // eslint-disable-next-line max-len
     return (isStarred = true) => getters.boards.filter((board) => board.isStarred === isStarred);
+  },
+  stages(state) {
+    return [...state.stages];
   },
 };
 

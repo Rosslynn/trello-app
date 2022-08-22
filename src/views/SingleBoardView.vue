@@ -1,80 +1,32 @@
+<!-- eslint-disable max-len -->
 <template>
-  <div class="custom-overflow">
-      <div class="stages">
-        Hello World
-      </div>
-      <div class="stages">
-        Hello World
-      </div>
-      <div class="stages">
-        Hello World
-      </div>
-      <div class="stages">
-        Hello World
-      </div>
-      <div class="stages">
-        Hello World
-      </div>
-      <div class="stages">
-        Hello World
-      </div>
-      <div class="stages">
-        Hello World
-      </div>
-      <div class="stages">
-        Hello World
-      </div>
-      <div class="stages">
-        Hello World
-      </div>
-      <div class="stages">
-        Hello World
-      </div>
-      <div class="stages">
-        Hello World
-      </div>
-      <div class="stages">
-        Hello World
-      </div>
-      <div class="stages">
-        Hello World
-      </div>
-      <div class="stages">
-        Hello World
-      </div>
-      <div class="stages">
-        Hello World
-      </div>
-      <div class="stages">
-        Hello World
-      </div>
-      <div class="stages">
-        Hello World
-      </div>
+  <div class="stages-container">
+   <stage-component v-for="stage in stages" :stage="stage" :key="JSON.stringify(stage)"></stage-component>
   </div>
 </template>
 
 <script>
 export default {
   name: 'SingleBoardView',
+  props: {
+    stages: {
+      type: Array,
+      required: true,
+    },
+  },
+  components: {
+    StageComponent: () => import('../components/StageComponent.vue'),
+  },
 };
 </script>
 
 <style scoped>
-.custom-overflow {
+.stages-container {
   overflow-y: hidden;
   overflow-x: auto;
   width: auto;
   height: 100%;
-  padding: 0px 50px;
+  padding: 0px 20px;
   white-space: nowrap;
-}
-
-.stages {
-  width: 100px;
-height: 50px;
-margin: 0 10px 0 0;
-padding: 0;
-display: inline-block;
 }
 </style>
