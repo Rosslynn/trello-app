@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 import {
   getBoards, deleteBoard, getBoardById, updateBoardById, addBoard, getBoardStages,
-  getBoardStagesCards,
+  getBoardStagesCards, addStage, addCard, updateCardById,
 } from '../../services/boardsService';
 import Board from '../../classes/board';
 
@@ -9,6 +9,7 @@ const state = () => ({
   boards: [],
   board: null,
   stages: [],
+  cards: [],
 });
 
 const mutations = {
@@ -26,6 +27,16 @@ const mutations = {
   },
   SET_STAGES(state, stages) {
     state.stages = stages;
+  },
+  PUSH_STAGE(state, stage) {
+    state.stages.push(stage);
+  },
+  SET_CARDS(state, cards) {
+    state.cards = [...state.cards, ...cards];
+  },
+  REPLACE_CARD(state, newCard) {
+    const cardIndex = state.cards.findIndex((card) => card.id === newCard.id);
+    state.cards.splice(cardIndex, 1, newCard);
   },
 };
 
@@ -64,9 +75,22 @@ const actions = {
     const { data } = await getBoardStages(boardId);
     commit('SET_STAGES', data);
   },
-  async obtainBoardStageCards(_ctx, { boardId, stageId }) {
+  async obtainBoardStageCards({ commit }, { boardId, stageId }) {
     const { data } = await getBoardStagesCards({ boardId, stageId });
+    commit('SET_CARDS', data);
     return data;
+  },
+  async createStage({ commit }, stageData) {
+    const { data } = await addStage(stageData);
+    commit('PUSH_STAGE', data);
+  },
+  async createCard(_ctx, stageData) {
+    const { data } = await addCard(stageData);
+    return data;
+  },
+  async updateSingleCard({ commit }, { id, body }) {
+    const { data } = await updateCardById({ id, body });
+    commit('REPLACE_CARD', data);
   },
 };
 
@@ -86,6 +110,9 @@ const getters = {
   },
   stages(state) {
     return [...state.stages];
+  },
+  getCardsByStageId(state) {
+    return (stageId) => state.cards.filter((card) => card.stageId === stageId);
   },
 };
 

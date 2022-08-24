@@ -1,6 +1,6 @@
 <!-- eslint-disable max-len -->
 <template>
-  <div>
+  <div style="height: 94% !important;">
     <div class="container">
       <div class="row">
         <div class="col-12 text-right pb-3">
@@ -56,7 +56,7 @@ export default {
   data() {
     return {
       newStage: {
-        id: this.id,
+        boardId: this.id,
         name: '',
       },
     };
@@ -79,7 +79,12 @@ export default {
           return;
         }
 
+        await this.$store.dispatch('boardsModule/createStage', this.newStage);
         this.$store.dispatch('notificationsModule/addNotification', { type: 'success', message: 'The stage was created succcesfully' });
+        this.newStage.name = '';
+        this.$nextTick(() => {
+          this.$refs.createStageForm.reset();
+        });
         this.$refs.btnModal.$el.click();
       } catch (error) {
         console.log(error);
@@ -100,5 +105,6 @@ export default {
   height: 100%;
   padding: 0px 20px;
   white-space: nowrap;
+  font-size: 16px;
 }
 </style>

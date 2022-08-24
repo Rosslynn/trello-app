@@ -51,3 +51,18 @@ export function getBoardStagesCards({ boardId, stageId }) {
   const url = `${baseURL}/boards/${boardId}/stages/${stageId}/cards`;
   return makeGetRequest(url);
 }
+
+export function addStage(body) {
+  const url = `${baseURL}/stages`;
+  return makePostRequest(url, body);
+}
+
+export function addCard(body) {
+  const url = `${baseURL}/cards`;
+  return makePostRequest(url, body);
+}
+
+export function updateCardById({ id, body }) {
+  const url = `${baseURL}/cards/${id}`;
+  return makePutRequest(url, body);
+}

@@ -2,7 +2,9 @@
   "fields": {
     "board-name": "'Board name'",
     "board-description": "'Board description'",
-    "stage-name": "'Stage name'"
+    "stage-name": "'Stage name'",
+    "card-name": "'Card name'",
+    "card-description": "'Card description'"
   },
   "header": {
     "menu": {
@@ -49,6 +51,16 @@
         "text": "Do you want to continue?",
         "confirmButtonText": "Delete",
         "cancelButtonText": "Cancel"
+      }
+    },
+    "stageComponent": {
+      "cards": {
+        "title": "Add a card...",
+        "newCard": {
+          "title": "Creating a new card",
+          "name": "Name",
+          "submit": "Submit"
+        }
       }
     }
   }

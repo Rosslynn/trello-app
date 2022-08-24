@@ -2,7 +2,9 @@
   "fields": {
     "board-name": "'Nombre del tablero'",
     "board-description": "'Descripción del tablero'",
-    "stage-name": "'Nombre de la etapa'"
+    "stage-name": "'Nombre de la etapa'",
+    "card-name": "'Nombre de la tarjeta'",
+    "card-description": "'Descripción del tablero'"
   },
   "header": {
     "menu": {
@@ -49,6 +51,16 @@
         "text": "¿Quieres continuar?",
         "confirmButtonText": "Borrar",
         "cancelButtonText": "Cancelar"
+      }
+    },
+    "stageComponent": {
+      "cards": {
+        "title": "Añadir una tarjeta...",
+        "newCard": {
+          "title": "Creando una nueva tarjeta",
+          "name": "Nombre",
+          "submit": "Enviar"
+        }
       }
     }
   }
