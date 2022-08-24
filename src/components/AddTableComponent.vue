@@ -89,6 +89,7 @@ export default {
         }
 
         NProgress.start();
+        this.newBoard.isStarred = Boolean(this.newBoard.isStarred);
         await this.$store.dispatch('boardsModule/createBoard', this.newBoard);
         this.$store.dispatch('notificationsModule/addNotification', { type: 'success', message: 'The board was created succcesfully' });
         this.closeTheModal();
