@@ -1,7 +1,8 @@
 {
   "fields": {
     "board-name": "'Board name'",
-    "board-description": "'Board description'"
+    "board-description": "'Board description'",
+    "stage-name": "'Stage name'"
   },
   "header": {
     "menu": {
@@ -19,6 +20,14 @@
       "labelName": "Name",
       "labelDescription": "Description",
       "submitText": "Submit"
+    },
+    "singleBoardView": {
+      "addStage": "Add stage",
+      "newStage": {
+        "title": "Creating a new stage",
+        "name": "Name",
+        "submit": "Submit"
+      }
     }
   },
   "components": {

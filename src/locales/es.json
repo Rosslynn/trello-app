@@ -1,7 +1,8 @@
 {
   "fields": {
     "board-name": "'Nombre del tablero'",
-    "board-description": "'Descripción del tablero'"
+    "board-description": "'Descripción del tablero'",
+    "stage-name": "'Nombre de la etapa'"
   },
   "header": {
     "menu": {
@@ -19,6 +20,14 @@
       "labelName": "Nombre",
       "labelDescription": "Descripción",
       "submitText": "Enviar"
+    },
+    "singleBoardView": {
+      "addStage": "Añadir etapa",
+      "newStage": {
+        "title": "Creando una nueva etapa",
+        "name": "Nombre",
+        "submit": "Enviar"
+      }
     }
   },
   "components": {

@@ -4,15 +4,7 @@
         <h2 class="h5 mb-3">{{ stage.name }}</h2>
       </div>
       <div class="stages-body">
-        <div class="bg-white mb-2 p-2">
-          Estudiar vue 2
-        </div>
-        <div class="bg-white mb-2 p-2">
-          Hacer los tests
-        </div>
-        <div class="bg-white mb-2 p-2">
-          Gimpse of us
-        </div>
+        <card-component  v-for="card in cards" :key="card.id" :card="card"></card-component>
       </div>
       <div class="stages-footer">
         <button class="btn w-100 text-left btn-sm text-muted">Add a card...</button>
@@ -22,7 +14,13 @@
 
 <script>
 export default {
+  components: { CardComponent: () => import('./CardComponent.vue') },
   name: 'StageComponent',
+  data() {
+    return {
+      cards: [],
+    };
+  },
   created() {
     this.getCards();
   },
@@ -36,9 +34,8 @@ export default {
     async getCards() {
       try {
         const cards = await this.$store.dispatch('boardsModule/obtainBoardStageCards', { boardId: this.stage.boardId, stageId: this.stage.id });
-        // TODO: utilizar las cartas pertenecientes a cada stage
+        this.cards = cards;
         // TODO: utilizar el bicho de reordenar: https://github.com/SortableJS/Vue.Draggable
-        console.log({ cards });
       } catch (error) {
         console.log(error);
       }
